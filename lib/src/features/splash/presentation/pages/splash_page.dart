@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
+import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
+import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
 import 'package:fake_ecommerce_app/src/core/services/local_storage.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
+import 'package:fake_ecommerce_app/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,21 +19,22 @@ class _SplashScreenState extends State<SplashPage> {
   setSplashDuration() async {
     return Timer(
       const Duration(seconds: 3),
-          () => pageNavigation(),
+      () => pageNavigation(),
     );
   }
 
   void pageNavigation() async {
     bool isOnBoardingViewed = await LocalStorage.getData(key: LocalStorageKey.onBoarding) ?? false;
     var token = await LocalStorage.getData(key: LocalStorageKey.token);
-    if(isOnBoardingViewed){
-      if(token != null){
-        // Get.offNamed(RouteGenerator.welcome);
-      } else{
-        // Get.offNamed(RouteGenerator.login);
+    if(!mounted) return;
+    if (isOnBoardingViewed) {
+      if (token != null) {
+        context.pushNamedAndRemoveUntil(RouteGenerator.login);
+      } else {
+        context.pushNamedAndRemoveUntil(RouteGenerator.login);
       }
-    } else{
-      // Get.offAllNamed(RouteGenerator.onBoarding);
+    } else {
+      context.pushNamedAndRemoveUntil(RouteGenerator.onBoarding);
     }
   }
 
