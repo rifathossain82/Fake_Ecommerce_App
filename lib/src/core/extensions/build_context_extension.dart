@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:flutter/material.dart';
 
 extension BuildContextExtension on BuildContext {
@@ -17,6 +18,22 @@ extension BuildContextExtension on BuildContext {
 
   double get maxScreenSize =>
       max(MediaQuery.of(this).size.height, MediaQuery.of(this).size.width);
+
+  TextTheme get textTheme => Theme.of(this).textTheme;
+
+  TextStyle get buttonTextStyle =>
+      Theme.of(this).textTheme.titleMedium!.copyWith(
+        fontWeight: FontWeight.bold,
+        color: kWhite,
+      );
+
+  TextStyle get outlinedButtonTextStyle =>
+      Theme.of(this).textTheme.titleMedium!.copyWith(
+        fontWeight: FontWeight.bold,
+        color: kPrimarySwatchColor,
+      );
+
+  bool get isDark => Theme.of(this).brightness == Brightness.dark;
 
   Future push(Widget nextPage) => Navigator.push(
         this,

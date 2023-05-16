@@ -1,5 +1,4 @@
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
-import 'package:fake_ecommerce_app/src/core/utils/styles.dart';
 import 'package:fake_ecommerce_app/src/features/onboarding/data/model/onboarding_slider_model.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +30,7 @@ class OnBoardingSliderWidgetItemBuilder extends StatelessWidget {
               Text(
                 sliderModel.title,
                 maxLines: 1,
-                style: MyTextStyles.h2.copyWith(
+                style: context.textTheme.titleLarge!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -39,7 +38,7 @@ class OnBoardingSliderWidgetItemBuilder extends StatelessWidget {
               Text(
                 sliderModel.subTitle,
                 maxLines: 1,
-                style: MyTextStyles.h4,
+                style: context.textTheme.bodyMedium,
               ),
             ],
           ),

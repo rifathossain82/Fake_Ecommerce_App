@@ -4,7 +4,6 @@ import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.d
 import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
 import 'package:fake_ecommerce_app/src/core/services/local_storage.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
-import 'package:fake_ecommerce_app/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

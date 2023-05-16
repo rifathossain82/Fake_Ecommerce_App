@@ -1,187 +1,78 @@
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:fake_ecommerce_app/src/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class AppThemeData {
-  AppThemeData._();
+class AppTheme {
+  AppTheme._();
 
   static final ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: kScaffoldBgColor,
+    brightness: Brightness.light,
     primarySwatch: kPrimarySwatchColor,
+    primaryColor: kLightPrimaryColor,
+    scaffoldBackgroundColor: kLightScaffoldBgColor,
     appBarTheme: AppBarTheme(
-      backgroundColor: kWhite,
-      foregroundColor: kBlackLight,
-      elevation: 2,
-      systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-
-        /// Status bar brightness (optional)
-        statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-        statusBarBrightness: Brightness.light, // For iOS (dark icons)
-      ),
+      foregroundColor: kWhite,
+      backgroundColor: kLightPrimaryColor,
+      elevation: 0,
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      hintStyle: MyTextStyles.h4.copyWith(
-        color: kGreyTextColor,
-      ),
-      labelStyle: MyTextStyles.h4,
-      floatingLabelStyle: MyTextStyles.h4.copyWith(
-        color: kPrimarySwatchColor,
-      ),
-      filled: true,
-      fillColor: kScaffoldBgColor,
-      prefixIconColor: kPrimarySwatchColor,
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: kGrey,
-        ),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: kPrimarySwatchColor,
-        ),
-      ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: kLightPrimaryColor,
+      foregroundColor: kWhite,
     ),
-    textTheme: TextTheme(
-      subtitle1: TextStyle(color: kBlackLight),
-      bodyText2: TextStyle(color: kBlackLight),
+    textTheme: GoogleFonts.poppinsTextTheme(Typography.blackCupertino),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStatePropertyAll(kLightPrimaryColor),
+      checkColor: MaterialStatePropertyAll(kWhite),
+      side: BorderSide(color: kGrey),
     ),
-    bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: kWhite
-    ),
-    dialogTheme: DialogTheme(
-      backgroundColor: kWhite,
-    ),
-    radioTheme: RadioThemeData(
-      fillColor: MaterialStatePropertyAll(kPrimarySwatchColor),
+    cardTheme: CardTheme(
+      color: kWhite,
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+      ),
     ),
     iconTheme: IconThemeData(
-      color: kBlackLight,
+      color: kGrey,
     ),
-  ).copyWith(
-    pageTransitionsTheme: const PageTransitionsTheme(
-        builders: <TargetPlatform, PageTransitionsBuilder>{
-          TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.linux: OpenUpwardsPageTransitionsBuilder(),
-          TargetPlatform.macOS: OpenUpwardsPageTransitionsBuilder(),
-        }),
   );
 
-  // static final ThemeData darkTheme = ThemeData(
-  //   scaffoldBackgroundColor: kDarkScaffoldBgColor,
-  //   primarySwatch: kPrimarySwatchColor,
-  //   appBarTheme: AppBarTheme(
-  //     backgroundColor: kPrimaryDarkColor,
-  //     foregroundColor: kWhite,
-  //     elevation: 2,
-  //     systemOverlayStyle: SystemUiOverlayStyle(
-  //       statusBarColor: kSecondaryDarkColor,
-  //
-  //       /// Status bar brightness (optional)
-  //       statusBarIconBrightness: Brightness.light, // For Android (light icons)
-  //       statusBarBrightness: Brightness.light, // For iOS (light icons)
-  //     ),
-  //   ),
-  //   // kPrimaryLightColor: appColorPrimary,
-  //   // primaryColorDark: appColorPrimary,
-  //   // errorColor: Colors.red,
-  //   // hoverColor: Colors.white54,
-  //   // dividerColor: const Color(0xFFEAEAEA),
-  //   // // fontFamily: GoogleFonts.openSans().fontFamily,
-  //   // appBarTheme: const AppBarTheme(
-  //   //   color: appLayout_background,
-  //   //   iconTheme: IconThemeData(color: textLight),
-  //   //   systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
-  //   // ),
-  //   // textSelectionTheme: const TextSelectionThemeData(cursorColor: textDark),
-  //   inputDecorationTheme: InputDecorationTheme(
-  //     hintStyle: MyTextStyles.h4.copyWith(
-  //       color: kGreyTextColor,
-  //     ),
-  //     labelStyle: MyTextStyles.h4,
-  //     floatingLabelStyle: MyTextStyles.h4.copyWith(
-  //       color: kPrimarySwatchColor,
-  //     ),
-  //     filled: true,
-  //     fillColor: kDarkScaffoldBgColor,
-  //     prefixIconColor: kPrimarySwatchColor,
-  //     enabledBorder: OutlineInputBorder(
-  //       borderSide: BorderSide(
-  //         color: kWhite,
-  //       ),
-  //     ),
-  //     focusedBorder: OutlineInputBorder(
-  //       borderSide: BorderSide(
-  //         color: kPrimarySwatchColor,
-  //       ),
-  //     ),
-  //   ),
-  //   textTheme: const TextTheme(
-  //     subtitle1: TextStyle(color: Colors.white),
-  //     bodyText2: TextStyle(color: Colors.white),
-  //   ),
-  //   bottomSheetTheme: BottomSheetThemeData(
-  //       backgroundColor: kPrimaryDarkColor
-  //   ),
-  //   dialogTheme: DialogTheme(
-  //     backgroundColor: kPrimaryDarkColor,
-  //   ),
-  //   radioTheme: RadioThemeData(
-  //     fillColor: MaterialStatePropertyAll(kWhite),
-  //   ),
-  //   iconTheme: const IconThemeData(
-  //     color: Colors.white,
-  //   ),
-  //   // colorScheme: const ColorScheme.light(primary: appColorPrimary, primaryVariant: appColorPrimary),
-  //   // cardTheme: const CardTheme(color: bgLight),
-  //   // cardColor: bgLight,
-  //   // // textTheme: TextTheme(
-  //   // //   button: TextStyle(color: appColorPrimary),
-  //   // //   headline6: TextStyle(color: textPrimaryColor),
-  //   // //   subtitle2: TextStyle(color: textSecondaryColor),
-  //   // // ),
-  //   // visualDensity: VisualDensity.adaptivePlatformDensity,
-  // ).copyWith(
-  //   pageTransitionsTheme: const PageTransitionsTheme(
-  //       builders: <TargetPlatform, PageTransitionsBuilder>{
-  //         TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
-  //         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-  //         TargetPlatform.linux: OpenUpwardsPageTransitionsBuilder(),
-  //         TargetPlatform.macOS: OpenUpwardsPageTransitionsBuilder(),
-  //       }),
-  // );
-
-  static void setDarkStatusBar() {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-        statusBarBrightness: Brightness.light, // For iOS (dark icons)
+  static final ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    primarySwatch: kPrimarySwatchColor,
+    primaryColor: kDarkPrimaryColor,
+    scaffoldBackgroundColor: kDarkScaffoldBgColor,
+    appBarTheme: AppBarTheme(
+      foregroundColor: kWhite,
+      backgroundColor: kDarkPrimaryColor,
+      elevation: 0,
+    ),
+    switchTheme: SwitchThemeData(
+      thumbColor: MaterialStatePropertyAll(kWhite),
+      trackColor: MaterialStatePropertyAll(kGrey),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: kDarkPrimaryColor,
+      foregroundColor: kWhite,
+    ),
+    textTheme: GoogleFonts.poppinsTextTheme(Typography.whiteCupertino),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStatePropertyAll(kWhite),
+      checkColor: MaterialStatePropertyAll(kDarkPrimaryColor),
+      side: BorderSide(color: kGrey),
+    ),
+    radioTheme: RadioThemeData(
+      fillColor: MaterialStatePropertyAll(kWhite),
+    ),
+    cardTheme: CardTheme(
+      color: kDarkPrimaryColor,
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
       ),
-    );
-  }
-
-  static void setLightStatusBar() {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.light, // For Android (light icons)
-        statusBarBrightness: Brightness.light, // For iOS (dark icons)
-      ),
-    );
-  }
-
-  static void enableInitialThemeSetting() {
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.manual,
-      overlays: SystemUiOverlay.values,
-    );
-  }
-
-  // top and bottom, both status bar
-  static void hideStatusBar() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  }
+    ),
+    iconTheme: IconThemeData(
+      color: kWhite,
+    ),
+  );
 }

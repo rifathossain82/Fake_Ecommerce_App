@@ -3,9 +3,8 @@ import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
 import 'package:fake_ecommerce_app/src/core/services/local_storage.dart';
+import 'package:fake_ecommerce_app/src/core/utils/app_constants.dart';
 import 'package:fake_ecommerce_app/src/core/utils/asset_path.dart';
-import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:fake_ecommerce_app/src/core/utils/styles.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_button.dart';
 import 'package:fake_ecommerce_app/src/features/onboarding/data/model/onboarding_slider_model.dart';
 import 'package:fake_ecommerce_app/src/features/onboarding/presentation/cubits/onboarding_cubit.dart';
@@ -20,23 +19,23 @@ class OnBoardingPage extends StatelessWidget {
   OnBoardingPage({Key? key}) : super(key: key);
 
   final CarouselController sliderController = CarouselController();
-  late OnBoardingCubit onBoardingCubit;
 
   final sliderDataList = [
     OnBoardingSliderModel(
       assetImgPath: AssetPath.introImage1,
-      title: 'Intro 1 Title',
-      subTitle: 'Intro 1 Subtitle',
+      title: 'Welcome to ${AppConstants.appName}',
+      subTitle: 'Your one-stop shop for all your fashion needs',
     ),
     OnBoardingSliderModel(
       assetImgPath: AssetPath.introImage2,
-      title: 'Intro 2 Title',
-      subTitle: 'Intro 2 Subtitle',
+      title: 'Get ready to shop',
+      subTitle: 'Discover the latest trends and shop with ease',
     ),
     OnBoardingSliderModel(
       assetImgPath: AssetPath.introImage3,
-      title: 'Intro 3 Title',
-      subTitle: 'Intro 3 Subtitle',
+      title: 'Join our community',
+      subTitle:
+          'Get exclusive deals, fashion tips, and more by signing up today',
     ),
   ];
 
@@ -45,6 +44,7 @@ class OnBoardingPage extends StatelessWidget {
     return BlocConsumer<OnBoardingCubit, OnBoardingState>(
         listener: (context, state) {},
         builder: (context, state) {
+          OnBoardingCubit onBoardingCubit = context.read<OnBoardingCubit>();
           return Scaffold(
             body: SafeArea(
               child: Column(
@@ -53,9 +53,9 @@ class OnBoardingPage extends StatelessWidget {
                   OnBoardingSliderWidgetBuilder(
                     controller: sliderController,
                     sliderDataList: sliderDataList,
-                    sliderIndex: 0,
+                    sliderIndex: onBoardingCubit.sliderIndex,
                     onPageChanged: (index, reason) {
-                      // onBoardingController.updateSliderIndex(index);
+                      onBoardingCubit.updateSliderIndex(index);
                     },
                   ),
 
@@ -71,7 +71,7 @@ class OnBoardingPage extends StatelessWidget {
                       children: [
                         OnBoardingSliderIndicatorWidget(
                           sliderLength: sliderDataList.length,
-                          currentSliderIndex: 0,
+                          currentSliderIndex: onBoardingCubit.sliderIndex,
                         ),
                         OnBoardingSliderForwardButton(
                           onTap: () {
@@ -100,10 +100,7 @@ class OnBoardingPage extends StatelessWidget {
                     width: context.screenWidth - 30,
                     child: Text(
                       'GET STARTED',
-                      style: MyTextStyles.h4.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: kWhite,
-                      ),
+                      style: context.buttonTextStyle,
                     ),
                   ),
                   const SizedBox(height: 16),

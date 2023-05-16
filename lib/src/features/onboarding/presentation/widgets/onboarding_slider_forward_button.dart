@@ -19,12 +19,12 @@ class OnBoardingSliderForwardButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: kPrimaryColor.withOpacity(0.1),
+          color: Theme.of(context).primaryColor.withOpacity(0.1),
         ),
         child: Icon(
           Icons.arrow_forward_ios_outlined,
           size: 20,
-          color: kPrimaryColor,
+          color: Theme.of(context).primaryColor,
         ),
       ),
     );

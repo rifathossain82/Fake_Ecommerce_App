@@ -1,7 +1,5 @@
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:fake_ecommerce_app/src/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class KTextFormFiled extends StatelessWidget {
   const KTextFormFiled({
@@ -53,17 +51,12 @@ class KTextFormFiled extends StatelessWidget {
         isDense: true,
         hintText: hintText,
         labelText: labelText,
-        labelStyle: GoogleFonts.roboto(
-          textStyle: MyTextStyles.h4.copyWith(
+        border: isBorder
+            ? OutlineInputBorder(
+          borderSide: BorderSide(
             color: kGreyTextColor,
           ),
-        ),
-        border: isBorder
-            ? UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: kGreyTextColor,
-                ),
-              )
+        )
             : InputBorder.none,
         suffixIcon: suffix,
         prefixIcon: prefixIcon,

@@ -1,14 +1,12 @@
 import 'package:fake_ecommerce_app/src/core/errors/messages.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/string_extension.dart';
-import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:fake_ecommerce_app/src/core/utils/styles.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_button.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_text_form_field.dart';
+import 'package:fake_ecommerce_app/src/features/auth/presentation/widgets/go_to_login_text_button.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -54,12 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const KLogo(),
                   Text(
                     'Create A New Account',
-                    style: GoogleFonts.roboto(
-                      textStyle: MyTextStyles.h4.copyWith(
-                        fontWeight: FontWeight.w300,
-                        color: kBlackLight,
-                      ),
-                    ),
+                    style: context.textTheme.titleMedium,
                   ),
 
                   /// name textField
@@ -84,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                   /// already have an account , login text
                   const SizedBox(height: 10),
-                  _buildGoToLoginText(),
+                  const GoToLoginTextButton(),
                   SizedBox(height: context.screenHeight * 0.03),
                 ],
               ),
@@ -136,34 +129,6 @@ class _RegisterPageState extends State<RegisterPage> {
           }
           return null;
         },
-        prefixIcon: GestureDetector(
-          onTap: () async {
-            // Countries countries =
-            //     await selectCountryCode(context) ?? Countries();
-            // if (countries.phoneCode != null) {
-            //   setState(() {
-            //     selectedCountry = countries;
-            //     kPrint(selectedCountry.iso);
-            //   });
-            // }
-          },
-          child: Container(
-            padding: const EdgeInsets.only(left: 2, right: 8),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('880'),
-                const SizedBox(
-                  width: 4,
-                ),
-                Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.black.withOpacity(0.8),
-                ),
-              ],
-            ),
-          ),
-        ),
       );
 
   Widget _buildPasswordTextFiled() => KTextFormFiled(
@@ -197,46 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
         onPressed: () => _registerMethod(context),
         child: Text(
           'Register',
-          style: GoogleFonts.roboto(
-            textStyle: MyTextStyles.h3.copyWith(
-              color: kWhite,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      );
-
-  Widget _buildGoToLoginText() => GestureDetector(
-        onTap: () {
-          context.pushReplacementNamed(RouteGenerator.login);
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Text(
-                "Already have an Account?",
-                style: MyTextStyles.h5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Login",
-                    style: MyTextStyles.h4.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  const Icon(
-                    Icons.arrow_forward,
-                    size: 20,
-                  )
-                ],
-              ),
-            ],
-          ),
+          style: context.buttonTextStyle,
         ),
       );
 

@@ -3,11 +3,12 @@ import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.d
 import 'package:fake_ecommerce_app/src/core/extensions/string_extension.dart';
 import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:fake_ecommerce_app/src/core/utils/styles.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_button.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
+import 'package:fake_ecommerce_app/src/core/widgets/k_text_form_field.dart';
+import 'package:fake_ecommerce_app/src/features/auth/presentation/widgets/create_a_new_account_text_button.dart';
+import 'package:fake_ecommerce_app/src/features/auth/presentation/widgets/forgot_password_text_button.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -47,11 +48,11 @@ class _LoginPageState extends State<LoginPage> {
                   const KLogo(),
                   SizedBox(height: context.screenHeight * 0.05),
                   _loginFormWidget(),
-                  _buildForgotPasswordText(),
+                  const ForgotPasswordTextButton(),
                   SizedBox(height: context.screenHeight * 0.04),
                   _buildLoginButton(),
                   const SizedBox(height: 10),
-                  _buildGoToRegisterText(),
+                  const CreateANewAccountTextButton(),
                 ],
               ),
             ),
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginFormWidget() {
     return Column(
       children: [
-        TextFormField(
+        KTextFormFiled(
           controller: emailTextController,
           validator: (value) {
             if (value.toString().isEmpty) {
@@ -74,13 +75,9 @@ class _LoginPageState extends State<LoginPage> {
             }
             return null;
           },
-          textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
-            isDense: true,
-            labelText: 'Email',
-            border: OutlineInputBorder(),
-          ),
+          inputAction: TextInputAction.next,
+          inputType: TextInputType.emailAddress,
+          labelText: 'Email',
         ),
         const SizedBox(height: 20),
         TextFormField(
@@ -117,75 +114,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildForgotPasswordText() => GestureDetector(
-        onTap: () {
-          // Get.to(() => ForgotPasswordScreen());
-        },
-        child: Align(
-          alignment: Alignment.centerRight,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-            ),
-            child: Text(
-              'Forgot Password?',
-              style: MyTextStyles.h4.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
-      );
-
-  Widget _buildGoToRegisterText() => GestureDetector(
-        onTap: () {
-          context.pushReplacementNamed(RouteGenerator.register);
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Text(
-                "Don't have an Account?",
-                style: MyTextStyles.h5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Create a new Account",
-                    style: MyTextStyles.h4.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  const Icon(
-                    Icons.arrow_forward,
-                    size: 20,
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-
-  Widget _buildLoginButton() => KButton(
-        onPressed: () => _loginMethod(),
-        child: Text(
-          'Login',
-          style: GoogleFonts.roboto(
-            textStyle: MyTextStyles.h3.copyWith(
-              color: kWhite,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      );
+  Widget _buildLoginButton() {
+    return KButton(
+      onPressed: () => _loginMethod(),
+      child: Text(
+        'Login',
+        style: context.buttonTextStyle,
+      ),
+    );
+  }
 
   void _loginMethod() {
     // if (_loginFormKey.currentState!.validate()) {}
-    // Get.offAllNamed(RouteGenerator.welcome);
+    context.pushNamedAndRemoveUntil(RouteGenerator.dashboard);
   }
 }

@@ -29,8 +29,8 @@ class OnBoardingSliderIndicatorWidget extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: currentSliderIndex == index
-                ? kPrimaryColor
-                : kPrimaryColor.withOpacity(0.1),
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).primaryColor.withOpacity(0.1),
           ),
         );
       },

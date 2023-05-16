@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:flutter/material.dart';
 
 class KButton extends StatelessWidget {
   const KButton({
@@ -27,7 +27,7 @@ class KButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius ?? 5),
       ),
-      color: bgColor ?? kPrimaryColor,
+      color: bgColor ?? kLightPrimaryColor,
       height: height ?? 42,
       minWidth: width ?? context.screenWidth,
       padding: const EdgeInsets.symmetric(horizontal: 15),
