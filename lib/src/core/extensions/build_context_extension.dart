@@ -23,17 +23,29 @@ extension BuildContextExtension on BuildContext {
 
   TextStyle get buttonTextStyle =>
       Theme.of(this).textTheme.titleMedium!.copyWith(
-        fontWeight: FontWeight.bold,
-        color: kWhite,
-      );
+            fontWeight: FontWeight.bold,
+            color: kWhite,
+          );
 
   TextStyle get outlinedButtonTextStyle =>
       Theme.of(this).textTheme.titleMedium!.copyWith(
-        fontWeight: FontWeight.bold,
-        color: kPrimarySwatchColor,
-      );
+            fontWeight: FontWeight.bold,
+            color: kPrimarySwatchColor,
+          );
 
   bool get isDark => Theme.of(this).brightness == Brightness.dark;
+
+  void showSnackBar({
+    required String message,
+    required Color bgColor,
+  }) =>
+      ScaffoldMessenger.of(this).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          duration: const Duration(seconds: 1),
+          backgroundColor: bgColor,
+        ),
+      );
 
   Future push(Widget nextPage) => Navigator.push(
         this,

@@ -1,7 +1,9 @@
-import 'package:fake_ecommerce_app/src/core/helpers/helper_methods.dart';
-import 'package:fake_ecommerce_app/src/features/home/data/models/product_model.dart';
+import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
+import 'package:fake_ecommerce_app/src/core/utils/color.dart';
+import 'package:fake_ecommerce_app/src/core/widgets/k_custom_loader.dart';
+import 'package:fake_ecommerce_app/src/core/widgets/no_data_found.dart';
 import 'package:fake_ecommerce_app/src/features/home/presentation/bloc/home_bloc.dart';
-import 'package:fake_ecommerce_app/src/features/home/presentation/widgets/product_item_builder.dart';
+import 'package:fake_ecommerce_app/src/features/home/presentation/widgets/product_gridview_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,39 +17,29 @@ class Homepage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Homepage'),
       ),
-      body: BlocConsumer<HomeBloc, HomeState>(
-        listener: (context, state) {
-          if (state is HomeError) {
-            kPrint('Error: ${state.message}');
-          }
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<HomeBloc>().add(GetProductList());
         },
-        builder: (context, state) {
-          if (state is HomeError) {
-            return const Text('No Data Found');
-          } else if (state is HomeLoaded) {
-            return GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.only(
-                left: 15,
-                right: 15,
-                top: 15,
-                bottom: 80,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 15,
-                crossAxisSpacing: 15,
-                childAspectRatio: 4/7,
-              ),
-              itemCount: state.productList.length,
-              itemBuilder: (context, index) => ProductItemBuilder(
-                product: state.productList[index],
-              ),
-            );
-          } else {
-            return const CircularProgressIndicator();
-          }
-        },
+        child: BlocConsumer<HomeBloc, HomeState>(
+          listener: (context, state) {
+            if (state is HomeError) {
+              context.showSnackBar(
+                message: state.message,
+                bgColor: failedColor,
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is HomeInitial || state is HomeLoading) {
+              return const KCustomLoader();
+            } else if (state is HomeLoaded) {
+              return ProductGridviewWidget(products: state.productList);
+            } else {
+              return const NoDataFound();
+            }
+          },
+        ),
       ),
     );
   }
