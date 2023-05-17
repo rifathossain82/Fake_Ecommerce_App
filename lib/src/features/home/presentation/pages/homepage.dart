@@ -1,7 +1,7 @@
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:fake_ecommerce_app/src/core/widgets/k_custom_loader.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/no_data_found.dart';
+import 'package:fake_ecommerce_app/src/core/widgets/shimmer_grid_view_builder.dart';
 import 'package:fake_ecommerce_app/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:fake_ecommerce_app/src/features/home/presentation/widgets/product_gridview_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class Homepage extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is HomeInitial || state is HomeLoading) {
-              return const KCustomLoader();
+              return const ShimmerGridViewBuilder();
             } else if (state is HomeLoaded) {
               return ProductGridviewWidget(products: state.productList);
             } else {

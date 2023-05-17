@@ -3,4 +3,5 @@ class Api {
 
   static String get login => '${_baseUrl}auth/login';
   static String get getProduct => '${_baseUrl}products';
+  static String get getProductCategories => '${_baseUrl}products/categories';
 }

@@ -60,7 +60,18 @@ class DashboardPage extends StatelessWidget {
         color: kWhite,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
-          KBoxShadow.containerShadow(),
+          BoxShadow(
+            offset: const Offset(0.0, 3.0),
+            spreadRadius: 0,
+            blurRadius: 4,
+            color: kItemShadowColor,
+          ),
+          BoxShadow(
+            offset: const Offset(0.0, -2.0),
+            spreadRadius: 0,
+            blurRadius: 4,
+            color: kItemShadowColor,
+          ),
         ],
       ),
       child: Row(

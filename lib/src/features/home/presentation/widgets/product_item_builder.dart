@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/app_constants.dart';
-import 'package:fake_ecommerce_app/src/core/utils/asset_path.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/box_shadow.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/cached_network_image_builder.dart';
+import 'package:fake_ecommerce_app/src/core/widgets/star_rating_builder.dart';
 import 'package:fake_ecommerce_app/src/features/home/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
@@ -38,11 +37,12 @@ class ProductItemBuilder extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 4,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
@@ -50,39 +50,48 @@ class ProductItemBuilder extends StatelessWidget {
                     maxLines: 1,
                     style: context.textTheme.titleMedium,
                   ),
-                  RichText(
-                    maxLines: 1,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: AppConstants.currency,
-                          style: context.textTheme.titleMedium!.copyWith(
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' ${product.price}',
-                          style: context.textTheme.titleLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                      ],
-                    ),
+                  const SizedBox(height: 2),
+                  Row(
+                    children: [
+                      StarRatingBuilder(
+                        color: kOrange,
+                        rating: product.rating?.rate ?? 0.0,
+                        starSize: 15,
+                      ),
+                      Text(
+                        ' (${product.rating?.count})',
+                        style: context.textTheme.bodySmall,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    product.title!,
-                    maxLines: 1,
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RichText(
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: AppConstants.currency,
+                              style: context.textTheme.titleMedium!.copyWith(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' ${product.price}',
+                              style: context.textTheme.titleLarge!.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        Icons.favorite_border_rounded,
+                      ),
+                    ],
                   ),
                 ],
               ),

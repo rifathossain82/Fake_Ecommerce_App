@@ -7,7 +7,6 @@ import 'package:fake_ecommerce_app/src/core/services/local_storage.dart';
 import 'package:http/http.dart' as http;
 
 class Network {
-
   static Future<http.Response> getRequest({required String api, params}) async {
     if (!await hasInternet) {
       throw Message.noInternet;
@@ -22,10 +21,16 @@ class Network {
           "Bearer ${LocalStorage.getData(key: LocalStorageKey.token)}"
     };
 
-    http.Response response = await http.get(
-      Uri.parse(api).replace(queryParameters: params),
-      headers: headers,
-    );
+    http.Response response = await http
+        .get(
+          Uri.parse(api).replace(queryParameters: params),
+          headers: headers,
+        )
+        .timeout(
+          const Duration(
+            seconds: 10,
+          ),
+        );
     return response;
   }
 
@@ -39,7 +44,8 @@ class Network {
 
     var headers = {
       'Accept': 'application/json',
-      "Authorization": "Bearer ${LocalStorage.getData(key: LocalStorageKey.token)}"
+      "Authorization":
+          "Bearer ${LocalStorage.getData(key: LocalStorageKey.token)}"
     };
 
     http.Response response = await http.post(
