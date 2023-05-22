@@ -1,6 +1,4 @@
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:fake_ecommerce_app/src/core/widgets/box_shadow.dart';
-import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -33,9 +31,6 @@ class KShimmerContainer extends StatelessWidget {
           borderRadius: shape == BoxShape.rectangle
               ? BorderRadius.circular(borderRadius)
               : null,
-        ),
-        child: const KLogo(
-          height: 50,
         ),
       ),
     );

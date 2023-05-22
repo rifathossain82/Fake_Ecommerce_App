@@ -21,6 +21,8 @@ extension BuildContextExtension on BuildContext {
 
   TextTheme get textTheme => Theme.of(this).textTheme;
 
+  Color get primaryColor => Theme.of(this).primaryColor;
+
   TextStyle get buttonTextStyle =>
       Theme.of(this).textTheme.titleMedium!.copyWith(
             fontWeight: FontWeight.bold,

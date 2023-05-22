@@ -1,3 +1,4 @@
+import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +30,8 @@ class OnBoardingSliderIndicatorWidget extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: currentSliderIndex == index
-                ? Theme.of(context).primaryColor
-                : Theme.of(context).primaryColor.withOpacity(0.1),
+                ? context.primaryColor
+                : context.primaryColor.withOpacity(0.1),
           ),
         );
       },

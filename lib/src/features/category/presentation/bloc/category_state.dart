@@ -23,6 +23,15 @@ class CategoryLoaded extends CategoryState {
   List<Object> get props => [categoryList];
 }
 
+class CategoryWiseProductLoaded extends CategoryState {
+  final List<ProductModel> productList;
+
+  const CategoryWiseProductLoaded(this.productList);
+
+  @override
+  List<Object> get props => [productList];
+}
+
 class CategoryError extends CategoryState {
   final String message;
 

@@ -16,7 +16,7 @@ class CachedNetworkImageBuilder extends StatelessWidget {
     required this.borderRadius,
     this.height = 100,
     this.width = double.infinity,
-    this.fit = BoxFit.none,
+    this.fit = BoxFit.contain,
   }) : super(key: key);
 
   @override
@@ -31,6 +31,7 @@ class CachedNetworkImageBuilder extends StatelessWidget {
           borderRadius: borderRadius,
           image: DecorationImage(
             image: imageProvider,
+            fit: fit,
           ),
         ),
       ),

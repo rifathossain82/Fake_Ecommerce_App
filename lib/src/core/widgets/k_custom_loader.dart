@@ -1,3 +1,4 @@
+import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/asset_path.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class KCustomLoader extends StatelessWidget {
                       height: 70,
                       width: 70,
                       child: CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
+                        color: context.primaryColor,
                       ),
                     ),
                     Positioned(
@@ -31,7 +32,7 @@ class KCustomLoader extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         child: Image.asset(
                           AssetPath.logo,
-                          color: Theme.of(context).primaryColor,
+                          color: context.primaryColor,
                         ),
                       ),
                     ),

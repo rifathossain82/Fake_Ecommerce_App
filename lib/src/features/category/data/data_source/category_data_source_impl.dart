@@ -13,4 +13,15 @@ class CategoryDataSourceImpl implements CategoryDataSource {
 
     return responseBody;
   }
+
+  @override
+  Future fetchCategoryWiseProducts({required String categoryName}) async {
+    dynamic responseBody = await Network.handleResponse(
+      await Network.getRequest(
+      api: Api.getCategoryWiseProduct(categoryName),
+    ),
+    );
+
+    return responseBody;
+  }
 }
