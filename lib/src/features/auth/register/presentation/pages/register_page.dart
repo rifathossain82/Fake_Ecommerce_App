@@ -5,7 +5,7 @@ import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_button.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_text_form_field.dart';
-import 'package:fake_ecommerce_app/src/features/auth/presentation/widgets/go_to_login_text_button.dart';
+import 'package:fake_ecommerce_app/src/features/auth/register/presentation/widgets/go_to_login_text_button.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {

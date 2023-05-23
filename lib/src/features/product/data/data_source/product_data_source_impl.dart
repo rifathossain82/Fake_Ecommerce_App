@@ -2,7 +2,7 @@ import 'package:fake_ecommerce_app/src/core/network/api.dart';
 import 'package:fake_ecommerce_app/src/core/network/network_utils.dart';
 import 'package:fake_ecommerce_app/src/features/product/data/data_source/product_data_source.dart';
 
-class ProductDataSourceImpl extends ProductDataSource {
+class ProductDataSourceImpl implements ProductDataSource {
   @override
   Future fetchProductList() async {
     dynamic responseBody = await Network.handleResponse(

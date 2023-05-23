@@ -1,14 +1,14 @@
 import 'package:fake_ecommerce_app/src/core/errors/messages.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
-import 'package:fake_ecommerce_app/src/core/extensions/string_extension.dart';
-import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_button.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_text_form_field.dart';
-import 'package:fake_ecommerce_app/src/features/auth/presentation/widgets/create_a_new_account_text_button.dart';
-import 'package:fake_ecommerce_app/src/features/auth/presentation/widgets/forgot_password_text_button.dart';
+import 'package:fake_ecommerce_app/src/features/auth/login/presentation/bloc/login_bloc.dart';
+import 'package:fake_ecommerce_app/src/features/auth/login/presentation/widgets/create_a_new_account_text_button.dart';
+import 'package:fake_ecommerce_app/src/features/auth/login/presentation/widgets/forgot_password_text_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailTextController = TextEditingController();
+  final userNameTextController = TextEditingController();
   final passwordTextController = TextEditingController();
 
   bool passwordVisibility = true;
@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    emailTextController.dispose();
+    userNameTextController.dispose();
     passwordTextController.dispose();
     super.dispose();
   }
@@ -66,18 +66,16 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       children: [
         KTextFormFiled(
-          controller: emailTextController,
+          controller: userNameTextController,
           validator: (value) {
             if (value.toString().isEmpty) {
-              return Message.emptyEmail;
-            } else if (!value.toString().isValidEmail) {
-              return Message.invalidEmail;
+              return Message.emptyField;
             }
             return null;
           },
           inputAction: TextInputAction.next,
-          inputType: TextInputType.emailAddress,
-          labelText: 'Email',
+          inputType: TextInputType.name,
+          labelText: 'Username',
         ),
         const SizedBox(height: 20),
         TextFormField(
@@ -125,7 +123,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _loginMethod() {
-    // if (_loginFormKey.currentState!.validate()) {}
-    context.pushNamedAndRemoveUntil(RouteGenerator.dashboard);
+    if (_loginFormKey.currentState!.validate()) {
+      context.read<LoginBloc>().add(
+        Login(
+          requestBody: {
+            'username': userNameTextController.text.trim(),
+            'password': passwordTextController.text.trim(),
+          },
+        ),
+      );
+    }
   }
 }
