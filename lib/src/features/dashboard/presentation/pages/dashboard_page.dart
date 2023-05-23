@@ -41,10 +41,26 @@ class DashboardPage extends StatelessWidget {
   }
 
   Widget _buildDashboardBody(BuildContext context) {
-    return SizedBox(
-      height: context.screenHeight,
-      width: context.screenWidth,
-      child: pages[dashboardCubit.bottomNavBarIndex],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ZOZO Shop'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.settings_rounded,
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: SizedBox(
+        height: context.screenHeight,
+        width: context.screenWidth,
+        child: pages[dashboardCubit.bottomNavBarIndex],
+      ),
     );
   }
 

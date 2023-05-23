@@ -1,7 +1,7 @@
 import 'package:fake_ecommerce_app/src/features/auth/presentation/pages/login_page.dart';
 import 'package:fake_ecommerce_app/src/features/auth/presentation/pages/register_page.dart';
 import 'package:fake_ecommerce_app/src/features/dashboard/presentation/pages/dashboard_page.dart';
-import 'package:fake_ecommerce_app/src/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:fake_ecommerce_app/src/features/on_boarding/presentation/pages/on_boarding_page.dart';
 import 'package:fake_ecommerce_app/src/features/splash/presentation/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 

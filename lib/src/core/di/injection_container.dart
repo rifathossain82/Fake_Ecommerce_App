@@ -4,12 +4,12 @@ import 'package:fake_ecommerce_app/src/features/category/data/repository/categor
 import 'package:fake_ecommerce_app/src/features/category/domain/repository/category_repository.dart';
 import 'package:fake_ecommerce_app/src/features/category/domain/use_case/category_use_case.dart';
 import 'package:fake_ecommerce_app/src/features/category/presentation/bloc/category_bloc.dart';
-import 'package:fake_ecommerce_app/src/features/home/data/data_source/home_data_source.dart';
-import 'package:fake_ecommerce_app/src/features/home/data/data_source/home_data_source_impl.dart';
-import 'package:fake_ecommerce_app/src/features/home/data/repository/home_repository_impl.dart';
-import 'package:fake_ecommerce_app/src/features/home/domain/repository/home_repository.dart';
-import 'package:fake_ecommerce_app/src/features/home/domain/use_case/home_use_case.dart';
-import 'package:fake_ecommerce_app/src/features/home/presentation/bloc/home_bloc.dart';
+import 'package:fake_ecommerce_app/src/features/product/data/data_source/product_data_source.dart';
+import 'package:fake_ecommerce_app/src/features/product/data/data_source/product_data_source_impl.dart';
+import 'package:fake_ecommerce_app/src/features/product/data/repository/product_repository_impl.dart';
+import 'package:fake_ecommerce_app/src/features/product/domain/repository/product_repository.dart';
+import 'package:fake_ecommerce_app/src/features/product/domain/use_case/product_use_case.dart';
+import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/product_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -18,18 +18,18 @@ Future<void> init() async {
   ///
   /// features start
 
-  /// home feature
+  /// product feature
   // bloc
-  sl.registerFactory(() => HomeBloc(homeUseCase: sl()));
+  sl.registerFactory(() => ProductBloc(productUseCase: sl()));
 
   // use case
-  sl.registerLazySingleton(() => HomeUseCase(homeRepository: sl()));
+  sl.registerLazySingleton(() => ProductUseCase(productRepository: sl()));
 
   // repository
-  sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(dataSource: sl()));
+  sl.registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl(dataSource: sl()));
 
   // data source
-  sl.registerLazySingleton<HomeDataSource>(() => HomeDataSourceImpl());
+  sl.registerLazySingleton<ProductDataSource>(() => ProductDataSourceImpl());
 
   /// category feature
   // bloc
