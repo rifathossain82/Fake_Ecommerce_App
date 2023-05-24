@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
 import 'package:fake_ecommerce_app/src/core/services/local_storage.dart';
+import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,8 +25,9 @@ class _SplashScreenState extends State<SplashPage> {
   }
 
   void pageNavigation() async {
-    bool isOnBoardingViewed = await LocalStorage.getData(key: LocalStorageKey.onBoarding) ?? false;
-    var token = await LocalStorage.getData(key: LocalStorageKey.token);
+    final localStorage = sl<LocalStorage>();
+    bool isOnBoardingViewed = localStorage.getData(key: LocalStorageKey.onBoarding) ?? false;
+    var token = localStorage.getData(key: LocalStorageKey.token);
     if(!mounted) return;
     if (isOnBoardingViewed) {
       if (token != null) {
@@ -55,8 +58,9 @@ class _SplashScreenState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
+    return Scaffold(
+      backgroundColor: kWhite,
+      body: const SafeArea(
         child: Center(
           child: KLogo(),
         ),

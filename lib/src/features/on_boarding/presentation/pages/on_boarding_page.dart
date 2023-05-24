@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
@@ -88,7 +89,8 @@ class OnBoardingPage extends StatelessWidget {
                   /// get started button
                   KButton(
                     onPressed: () {
-                      LocalStorage.saveData(
+                      final localStorage = sl<LocalStorage>();
+                      localStorage.saveData(
                         key: LocalStorageKey.onBoarding,
                         data: true,
                       ).then(

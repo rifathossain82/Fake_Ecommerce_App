@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 Color kLightPrimaryColor = const Color(0xFF253145);
 Color kLightSecondaryColor = const Color(0xFF6d82a3);
 
-Color kDarkPrimaryColor = const Color(0xFF253145);
+Color kDarkPrimaryColor = const Color(0xFF0f1926);
 Color kDarkSecondaryColor = const Color(0xFFfffefe);
 
 Color kWhite = Colors.white;
@@ -42,7 +42,7 @@ Color failedColor = Colors.red;
 Color warningColor = Colors.orange;
 
 Color kLightScaffoldBgColor = Colors.white;
-Color kDarkScaffoldBgColor = const Color(0xFF171d30);
+Color kDarkScaffoldBgColor = const Color(0xFF222a3b);
 
 final List<Color> randomColors = [
   Colors.red,

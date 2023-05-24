@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/string_extension.dart';
@@ -33,7 +31,7 @@ class CategoryItemBuilder extends StatelessWidget {
       child: Container(
         height: 100,
         decoration: BoxDecoration(
-          color: kWhite,
+          color: context.isDark ? kDarkPrimaryColor : kWhite,
           borderRadius: BorderRadius.circular(4),
           boxShadow: [
             KBoxShadow.containerShadow(),

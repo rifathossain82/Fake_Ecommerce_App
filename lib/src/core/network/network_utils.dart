@@ -1,12 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/errors/messages.dart';
 import 'package:fake_ecommerce_app/src/core/helpers/helper_methods.dart';
 import 'package:fake_ecommerce_app/src/core/services/local_storage.dart';
 import 'package:http/http.dart' as http;
 
+final _localStorage = sl<LocalStorage>();
+
 class Network {
+
   static Future<http.Response> getRequest({required String api, params}) async {
     if (!await hasInternet) {
       throw Message.noInternet;
@@ -18,7 +22,7 @@ class Network {
     var headers = {
       'Accept': 'application/json',
       "Authorization":
-          "Bearer ${LocalStorage.getData(key: LocalStorageKey.token)}"
+          "Bearer ${_localStorage.getData(key: LocalStorageKey.token)}"
     };
 
     http.Response response = await http
@@ -45,7 +49,7 @@ class Network {
     var headers = {
       'Accept': 'application/json',
       "Authorization":
-          "Bearer ${LocalStorage.getData(key: LocalStorageKey.token)}"
+          "Bearer ${_localStorage.getData(key: LocalStorageKey.token)}"
     };
 
     http.Response response = await http.post(
@@ -72,7 +76,7 @@ class Network {
     var headers = {
       'Accept': 'application/json',
       "Authorization":
-          "Bearer ${LocalStorage.getData(key: LocalStorageKey.token)}"
+          "Bearer ${_localStorage.getData(key: LocalStorageKey.token)}"
     };
 
     http.MultipartRequest request;
@@ -149,7 +153,7 @@ class Network {
   }
 
   static void _logout() {
-    LocalStorage.removeData(key: LocalStorageKey.token);
+    _localStorage.removeData(key: LocalStorageKey.token);
     // Get.offAll(() => const LoginScreen());
   }
 }

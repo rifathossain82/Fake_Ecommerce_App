@@ -22,7 +22,7 @@ class ProductItemBuilder extends StatelessWidget {
       onTap: () => context.push(ProductDetailsPage(product: product)),
       child: Container(
         decoration: BoxDecoration(
-          color: kWhite,
+          color: context.isDark ? context.primaryColor : kWhite,
           borderRadius: BorderRadius.circular(4),
           boxShadow: [
             KBoxShadow.containerShadow(),
@@ -78,9 +78,7 @@ class ProductItemBuilder extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: AppConstants.currency,
-                                style: context.textTheme.titleMedium!.copyWith(
-                                  color: context.primaryColor,
-                                ),
+                                style: context.textTheme.titleMedium,
                               ),
                               TextSpan(
                                 text: ' ${product.price}',

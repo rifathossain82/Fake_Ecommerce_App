@@ -1,4 +1,6 @@
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
+import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
+import 'package:fake_ecommerce_app/src/core/utils/asset_path.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/features/cart/presentation/pages/cart_page.dart';
 import 'package:fake_ecommerce_app/src/features/category/presentation/pages/category_page.dart';
@@ -43,12 +45,16 @@ class DashboardPage extends StatelessWidget {
   Widget _buildDashboardBody(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ZOZO Shop'),
+        title: Image.asset(
+          AssetPath.logo,
+          height: 20,
+          color: kWhite,
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () => context.pushNamed(RouteGenerator.settings),
               icon: const Icon(
                 Icons.settings_rounded,
               ),
@@ -72,7 +78,7 @@ class DashboardPage extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: kWhite,
+        color: context.isDark ? kDarkPrimaryColor : kWhite,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(

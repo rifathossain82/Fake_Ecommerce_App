@@ -29,6 +29,7 @@ class CachedNetworkImageBuilder extends StatelessWidget {
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
           borderRadius: borderRadius,
+          color: kWhite,
           image: DecorationImage(
             image: imageProvider,
             fit: fit,

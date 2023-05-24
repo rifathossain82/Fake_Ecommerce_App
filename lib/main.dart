@@ -9,6 +9,7 @@ import 'package:fake_ecommerce_app/src/features/category/presentation/bloc/categ
 import 'package:fake_ecommerce_app/src/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import 'package:fake_ecommerce_app/src/features/on_boarding/presentation/cubits/on_boarding_cubit.dart';
 import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/product_bloc.dart';
+import 'package:fake_ecommerce_app/src/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,19 +34,29 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<LoginBloc>()),
         BlocProvider(create: (context) => sl<ProductBloc>()),
         BlocProvider(create: (context) => sl<CategoryBloc>()),
+        BlocProvider(create: (context) => SettingsCubit()),
       ],
-      child: MaterialApp(
-        builder: (context, child) {
-          return ScrollConfiguration(
-            behavior: KScrollBehavior(),
-            child: child!,
+      child: BlocConsumer<SettingsCubit, SettingsState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
+            builder: (context, child) {
+              return ScrollConfiguration(
+                behavior: KScrollBehavior(),
+                child: child!,
+              );
+            },
+            debugShowCheckedModeBanner: false,
+            title: AppConstants.appName,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: context.read<SettingsCubit>().isDark
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            initialRoute: RouteGenerator.splash,
+            onGenerateRoute: RouteGenerator.generateRoute,
           );
         },
-        debugShowCheckedModeBanner: false,
-        title: AppConstants.appName,
-        theme: AppTheme.lightTheme,
-        initialRoute: RouteGenerator.splash,
-        onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
   }

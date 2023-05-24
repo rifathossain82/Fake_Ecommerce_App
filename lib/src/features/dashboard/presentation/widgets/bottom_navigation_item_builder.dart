@@ -40,7 +40,9 @@ class BottomNavigationItemBuilder extends StatelessWidget {
           margin: margin,
           decoration: BoxDecoration(
             color: isSelected
-                ? context.primaryColor.withOpacity(0.1)
+                ? context.isDark
+                    ? kWhite.withOpacity(0.1)
+                    : context.primaryColor.withOpacity(0.1)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(borderRadius),
           ),
@@ -54,14 +56,22 @@ class BottomNavigationItemBuilder extends StatelessWidget {
               Icon(
                 icon,
                 size: 18,
-                color: isSelected ? context.primaryColor : kBlueGrey,
+                color: isSelected
+                    ? context.isDark
+                        ? kWhite
+                        : context.primaryColor
+                    : kBlueGrey,
               ),
               const SizedBox(width: 6),
               Text(
                 name,
                 textAlign: TextAlign.center,
                 style: context.textTheme.titleSmall?.copyWith(
-                  color: isSelected ? context.primaryColor : kBlueGrey,
+                  color: isSelected
+                      ? context.isDark
+                          ? kWhite
+                          : context.primaryColor
+                      : kBlueGrey,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),

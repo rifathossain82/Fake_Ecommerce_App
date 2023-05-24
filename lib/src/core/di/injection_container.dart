@@ -1,3 +1,4 @@
+import 'package:fake_ecommerce_app/src/core/services/local_storage.dart';
 import 'package:fake_ecommerce_app/src/features/auth/login/presentation/bloc/login_bloc.dart';
 import 'package:fake_ecommerce_app/src/features/auth/root/data/data_source/auth_data_source.dart';
 import 'package:fake_ecommerce_app/src/features/auth/root/data/data_source/auth_data_source_impl.dart';
@@ -17,6 +18,7 @@ import 'package:fake_ecommerce_app/src/features/product/domain/repository/produc
 import 'package:fake_ecommerce_app/src/features/product/domain/use_case/product_use_case.dart';
 import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/product_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
 
@@ -32,7 +34,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AuthUseCase(authRepository: sl()));
 
   // repository
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(dataSource: sl()));
+  sl.registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(dataSource: sl()));
 
   // data source
   sl.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImpl());
@@ -45,7 +48,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => ProductUseCase(productRepository: sl()));
 
   // repository
-  sl.registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl(dataSource: sl()));
+  sl.registerLazySingleton<ProductRepository>(
+      () => ProductRepositoryImpl(dataSource: sl()));
 
   // data source
   sl.registerLazySingleton<ProductDataSource>(() => ProductDataSourceImpl());
@@ -58,17 +62,18 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CategoryUseCase(categoryRepository: sl()));
 
   // repository
-  sl.registerLazySingleton<CategoryRepository>(() => CategoryRepositoryImpl(dataSource: sl()));
+  sl.registerLazySingleton<CategoryRepository>(
+      () => CategoryRepositoryImpl(dataSource: sl()));
 
   // data source
   sl.registerLazySingleton<CategoryDataSource>(() => CategoryDataSourceImpl());
 
-
-
   ///
   /// core
 
-
   ///
   /// external
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreferences);
+  sl.registerLazySingleton(() => LocalStorage(sl<SharedPreferences>()));
 }
