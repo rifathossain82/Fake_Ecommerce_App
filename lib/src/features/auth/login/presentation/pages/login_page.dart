@@ -1,5 +1,6 @@
 import 'package:fake_ecommerce_app/src/core/errors/messages.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
+import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_button.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
@@ -115,9 +116,32 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLoginButton() {
     return KButton(
       onPressed: () => _loginMethod(),
-      child: Text(
-        'Login',
-        style: context.buttonTextStyle,
+      child: BlocConsumer<LoginBloc, LoginState>(
+        listener: (context, state) {
+          if(state is LoginError){
+            context.showSnackBar(
+              message: state.message,
+              bgColor: failedColor,
+            );
+          }
+          if(state is LoginLoaded){
+            context.showSnackBar(
+              message: 'Login Success!',
+              bgColor: successColor,
+            );
+            context.pushNamedAndRemoveUntil(RouteGenerator.dashboard);
+          }
+        },
+        builder: (context, state) {
+          if(state is LoginLoading){
+            return CircularProgressIndicator(color: kWhite);
+          } else {
+            return Text(
+              'Login',
+              style: context.buttonTextStyle,
+            );
+          }
+        }
       ),
     );
   }
@@ -125,13 +149,13 @@ class _LoginPageState extends State<LoginPage> {
   void _loginMethod() {
     if (_loginFormKey.currentState!.validate()) {
       context.read<LoginBloc>().add(
-        Login(
-          requestBody: {
-            'username': userNameTextController.text.trim(),
-            'password': passwordTextController.text.trim(),
-          },
-        ),
-      );
+            Login(
+              requestBody: {
+                'username': userNameTextController.text.trim(),
+                'password': passwordTextController.text.trim(),
+              },
+            ),
+          );
     }
   }
 }

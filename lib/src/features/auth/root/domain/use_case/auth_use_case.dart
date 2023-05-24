@@ -6,7 +6,7 @@ class AuthUseCase {
 
   const AuthUseCase({required this.authRepository});
 
-  Future<String> login(Map<String, dynamic> requestBody){
-    return authRepository.login(requestBody);
+  Future<String> login(Map<String, dynamic> requestBody) async{
+    return await authRepository.login(requestBody);
   }
 }

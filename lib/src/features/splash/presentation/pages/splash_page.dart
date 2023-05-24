@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashPage> {
     if(!mounted) return;
     if (isOnBoardingViewed) {
       if (token != null) {
-        context.pushNamedAndRemoveUntil(RouteGenerator.login);
+        context.pushNamedAndRemoveUntil(RouteGenerator.dashboard);
       } else {
         context.pushNamedAndRemoveUntil(RouteGenerator.login);
       }

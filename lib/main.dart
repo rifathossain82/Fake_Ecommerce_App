@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OnBoardingCubit()),
         BlocProvider(create: (context) => DashboardCubit()),
         BlocProvider(create: (context) => sl<LoginBloc>()),
-        BlocProvider(create: (context) => sl<CategoryBloc>()),
+        BlocProvider(create: (context) => sl<ProductBloc>()),
         BlocProvider(create: (context) => sl<CategoryBloc>()),
       ],
       child: MaterialApp(
