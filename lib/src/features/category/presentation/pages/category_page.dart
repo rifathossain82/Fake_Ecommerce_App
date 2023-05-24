@@ -16,6 +16,7 @@ class CategoryPage extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
+          context.read<CategoryBloc>().isCategoryListLoaded = false;
           context.read<CategoryBloc>().add(GetCategoryList());
         },
         child: Stack(

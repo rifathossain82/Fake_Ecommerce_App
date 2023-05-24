@@ -21,6 +21,7 @@ class ProductPage extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
+          context.read<ProductBloc>().isProductListLoaded = false;
           context.read<ProductBloc>().add(event);
         },
         child: Stack(

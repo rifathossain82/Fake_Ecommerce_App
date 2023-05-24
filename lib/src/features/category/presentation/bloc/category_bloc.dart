@@ -7,6 +7,8 @@ part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final CategoryUseCase categoryUseCase;
+  /// Track whether the category list has been loaded
+  bool isCategoryListLoaded = false;
   CategoryBloc({required this.categoryUseCase}) : super(CategoryInitial()) {
     on<CategoryEvent>(_onCategoryEvent);
   }
@@ -14,9 +16,14 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   void _onCategoryEvent(CategoryEvent event, Emitter emit) async {
     if (event is GetCategoryList) {
       try {
-        emit(CategoryLoading());
-        var categoryList = await categoryUseCase.getCategoryList();
-        emit(CategoryLoaded(categoryList));
+        /// Check if the category list is already loaded
+        if (!isCategoryListLoaded) {
+          emit(CategoryLoading());
+          var categoryList = await categoryUseCase.getCategoryList();
+          /// Set the flag to indicate the category list is loaded
+          isCategoryListLoaded = true;
+          emit(CategoryLoaded(categoryList));
+        }
       } catch (e) {
         emit(CategoryError('$e'));
       }

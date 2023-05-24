@@ -9,7 +9,8 @@ part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductUseCase productUseCase;
-
+  /// Track whether the product list has been loaded
+  bool isProductListLoaded = false;
   ProductBloc({required this.productUseCase}) : super(ProductInitial()) {
     on<ProductEvent>(_onProductEvent);
   }
@@ -17,9 +18,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   void _onProductEvent(ProductEvent event, Emitter emit) async {
     if (event is GetProductList) {
       try {
-        emit(ProductLoading());
-        var productList = await productUseCase.getProductList();
-        emit(ProductLoaded(productList));
+        /// Check if the product list is already loaded
+        if (!isProductListLoaded) {
+          emit(ProductLoading());
+          var productList = await productUseCase.getProductList();
+          /// Set the flag to indicate the product list is loaded
+          isProductListLoaded = true;
+          emit(ProductLoaded(productList));
+        }
       } catch (e) {
         emit(ProductError('$e'));
       }
