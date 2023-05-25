@@ -5,4 +5,6 @@ class Api {
   static String get getProduct => '${_baseUrl}products';
   static String get getProductCategories => '${_baseUrl}products/categories';
   static String getCategoryWiseProduct(String categoryName) => '${_baseUrl}products/category/$categoryName';
+  static String get getUsers => '${_baseUrl}users';
+  static String getUserDetails(int id) => '${_baseUrl}users/$id';
 }

@@ -1,5 +1,6 @@
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/asset_path.dart';
+import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:flutter/material.dart';
 
 class KCustomLoader extends StatelessWidget {
@@ -23,7 +24,8 @@ class KCustomLoader extends StatelessWidget {
                       height: 70,
                       width: 70,
                       child: CircularProgressIndicator(
-                        color: context.primaryColor,
+                        color: context.isDark ? kWhite : kLightPrimaryColor,
+                        backgroundColor: Colors.transparent,
                       ),
                     ),
                     Positioned(
@@ -32,16 +34,16 @@ class KCustomLoader extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         child: Image.asset(
                           AssetPath.logo,
-                          color: context.primaryColor,
+                          color: context.isDark ? kWhite : kLightPrimaryColor,
                         ),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 20),
-                const DefaultTextStyle(
-                  style: TextStyle(),
-                  child: Text('Please Wait...'),
+                Text(
+                  'Please Wait...',
+                  style: context.textTheme.titleSmall,
                 ),
               ],
             ),

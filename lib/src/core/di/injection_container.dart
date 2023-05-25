@@ -17,6 +17,12 @@ import 'package:fake_ecommerce_app/src/features/product/data/repository/product_
 import 'package:fake_ecommerce_app/src/features/product/domain/repository/product_repository.dart';
 import 'package:fake_ecommerce_app/src/features/product/domain/use_case/product_use_case.dart';
 import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/product_bloc.dart';
+import 'package:fake_ecommerce_app/src/features/user/data/data_source/user_data_source.dart';
+import 'package:fake_ecommerce_app/src/features/user/data/data_source/user_data_source_impl.dart';
+import 'package:fake_ecommerce_app/src/features/user/data/repository/user_repository_impl.dart';
+import 'package:fake_ecommerce_app/src/features/user/domain/repository/user_repository.dart';
+import 'package:fake_ecommerce_app/src/features/user/domain/use_case/user_use_case.dart';
+import 'package:fake_ecommerce_app/src/features/user/presentation/bloc/user_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,6 +31,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   ///
   /// features start
+
 
   /// auth feature
   // bloc
@@ -40,6 +47,7 @@ Future<void> init() async {
   // data source
   sl.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImpl());
 
+
   /// product feature
   // bloc
   sl.registerFactory(() => ProductBloc(productUseCase: sl()));
@@ -53,6 +61,7 @@ Future<void> init() async {
 
   // data source
   sl.registerLazySingleton<ProductDataSource>(() => ProductDataSourceImpl());
+
 
   /// category feature
   // bloc
@@ -68,8 +77,27 @@ Future<void> init() async {
   // data source
   sl.registerLazySingleton<CategoryDataSource>(() => CategoryDataSourceImpl());
 
+
+  /// user feature
+  // bloc
+  sl.registerFactory(() => UserBloc(useCase: sl()));
+
+  // use case
+  sl.registerLazySingleton(() => UserUseCase(userRepository: sl()));
+
+  // repository
+  sl.registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(dataSource: sl()));
+
+  // data source
+  sl.registerLazySingleton<UserDataSource>(() => UserDataSourceImpl());
+
+
+
   ///
   /// core
+
+
 
   ///
   /// external

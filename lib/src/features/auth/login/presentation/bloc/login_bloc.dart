@@ -17,7 +17,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _onLoginEvent(LoginEvent event, Emitter emit) async {
     if (event is Login) {
       try {
-        emit(LoginInitial());
+        emit(LoginLoading());
         var token = await useCase.authRepository.login(event.requestBody);
         final localStorage = sl<LocalStorage>();
         localStorage.saveData(key: LocalStorageKey.token, data: token);

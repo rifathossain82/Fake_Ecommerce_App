@@ -74,5 +74,10 @@ class AppTheme {
     iconTheme: IconThemeData(
       color: kWhite,
     ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: kDarkPrimaryColor,
+      circularTrackColor: kWhite,
+      refreshBackgroundColor: kWhite,
+    ),
   );
 }

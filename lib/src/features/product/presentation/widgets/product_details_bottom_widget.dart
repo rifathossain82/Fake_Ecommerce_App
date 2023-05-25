@@ -33,9 +33,7 @@ class ProductDetailsBottomWidget extends StatelessWidget {
               children: [
                 TextSpan(
                   text: AppConstants.currency,
-                  style: context.textTheme.titleMedium!.copyWith(
-                    color: context.primaryColor,
-                  ),
+                  style: context.textTheme.titleMedium!,
                 ),
                 TextSpan(
                   text: ' ${product.price}',

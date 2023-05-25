@@ -115,34 +115,37 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoginButton() {
     return KButton(
-      onPressed: () => _loginMethod(),
-      child: BlocConsumer<LoginBloc, LoginState>(
-        listener: (context, state) {
-          if(state is LoginError){
-            context.showSnackBar(
-              message: state.message,
-              bgColor: failedColor,
-            );
-          }
-          if(state is LoginLoaded){
-            context.showSnackBar(
-              message: 'Login Success!',
-              bgColor: successColor,
-            );
-            context.pushNamedAndRemoveUntil(RouteGenerator.dashboard);
-          }
-        },
-        builder: (context, state) {
-          if(state is LoginLoading){
-            return CircularProgressIndicator(color: kWhite);
-          } else {
-            return Text(
-              'Login',
-              style: context.buttonTextStyle,
-            );
-          }
+      onPressed: _loginMethod,
+      child: BlocConsumer<LoginBloc, LoginState>(listener: (context, state) {
+        if (state is LoginError) {
+          context.showSnackBar(
+            message: state.message,
+            bgColor: failedColor,
+          );
         }
-      ),
+        if (state is LoginLoaded) {
+          context.showSnackBar(
+            message: 'Login Success!',
+            bgColor: successColor,
+          );
+          context.pushNamedAndRemoveUntil(RouteGenerator.dashboard);
+        }
+      }, builder: (context, state) {
+        if (state is LoginLoading) {
+          return SizedBox(
+            height: 20,
+            width: 20,
+            child: CircularProgressIndicator(
+              color: kWhite,
+            ),
+          );
+        } else {
+          return Text(
+            'Login',
+            style: context.buttonTextStyle,
+          );
+        }
+      }),
     );
   }
 

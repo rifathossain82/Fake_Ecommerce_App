@@ -27,7 +27,7 @@ class KButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius ?? 5),
       ),
-      color: bgColor ?? kLightPrimaryColor,
+      color: bgColor ?? context.primaryColor,
       height: height ?? 42,
       minWidth: width ?? context.screenWidth,
       padding: const EdgeInsets.symmetric(horizontal: 15),

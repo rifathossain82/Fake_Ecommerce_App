@@ -2,12 +2,12 @@ import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.d
 import 'package:fake_ecommerce_app/src/core/routes/routes.dart';
 import 'package:fake_ecommerce_app/src/core/utils/asset_path.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:fake_ecommerce_app/src/features/cart/presentation/pages/cart_page.dart';
 import 'package:fake_ecommerce_app/src/features/category/presentation/pages/category_page.dart';
 import 'package:fake_ecommerce_app/src/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import 'package:fake_ecommerce_app/src/features/dashboard/presentation/cubit/dashboard_state.dart';
 import 'package:fake_ecommerce_app/src/features/dashboard/presentation/widgets/bottom_navigation_item_builder.dart';
 import 'package:fake_ecommerce_app/src/features/home/presentation/pages/homepage.dart';
+import 'package:fake_ecommerce_app/src/features/user/presentation/pages/user_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +18,7 @@ class DashboardPage extends StatelessWidget {
   final List<Widget> pages = [
     const CategoryPage(),
     const Homepage(),
-    const CartPage(),
+    const UserPage(),
   ];
 
   @override
@@ -114,8 +114,8 @@ class DashboardPage extends StatelessWidget {
           BottomNavigationItemBuilder(
             onTap: () => dashboardCubit.updateBottomNavBarIndex(2),
             isSelected: dashboardCubit.bottomNavBarIndex == 2,
-            name: 'Cart',
-            icon: Icons.shopping_cart_rounded,
+            name: 'User',
+            icon: Icons.people,
           ),
         ],
       ),

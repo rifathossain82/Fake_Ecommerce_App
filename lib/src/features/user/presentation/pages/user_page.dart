@@ -2,38 +2,33 @@ import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.d
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_floating_action_button.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/no_data_found.dart';
-import 'package:fake_ecommerce_app/src/core/widgets/shimmer_grid_view_builder.dart';
-import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/product_bloc.dart';
-import 'package:fake_ecommerce_app/src/features/product/presentation/widgets/product_gridview_widget.dart';
+import 'package:fake_ecommerce_app/src/core/widgets/shimmer_list_view_builder.dart';
+import 'package:fake_ecommerce_app/src/features/user/presentation/bloc/user_bloc.dart';
+import 'package:fake_ecommerce_app/src/features/user/presentation/widgets/user_list_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductPage extends StatelessWidget {
-  final ProductEvent event;
-
-  const ProductPage({
-    Key? key,
-    required this.event,
-  }) : super(key: key);
+class UserPage extends StatelessWidget {
+  const UserPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProductBloc>().add(event);
+    context.read<UserBloc>().add(GetUserList());
     return Scaffold(
       floatingActionButton: KFloatingActionButton(
         onPressed: () {},
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          context.read<ProductBloc>().isProductListLoaded = false;
-          context.read<ProductBloc>().add(event);
+          context.read<UserBloc>().isUserListLoaded = false;
+          context.read<UserBloc>().add(GetUserList());
         },
         child: Stack(
           children: [
             ListView(),
-            BlocConsumer<ProductBloc, ProductState>(
+            BlocConsumer<UserBloc, UserState>(
               listener: (context, state) {
-                if (state is ProductError) {
+                if (state is UserError) {
                   context.showSnackBar(
                     message: state.message,
                     bgColor: failedColor,
@@ -41,10 +36,10 @@ class ProductPage extends StatelessWidget {
                 }
               },
               builder: (context, state) {
-                if (state is ProductInitial || state is ProductLoading) {
-                  return const ShimmerGridViewBuilder();
-                } else if (state is ProductLoaded) {
-                  return ProductGridviewWidget(products: state.productList);
+                if (state is UserInitial || state is UserLoading) {
+                  return const ShimmerListViewBuilder();
+                } else if (state is UserLoaded) {
+                  return UserListViewWidget(userList: state.userList);
                 } else {
                   return const NoDataFound();
                 }

@@ -10,6 +10,7 @@ import 'package:fake_ecommerce_app/src/features/dashboard/presentation/cubit/das
 import 'package:fake_ecommerce_app/src/features/on_boarding/presentation/cubits/on_boarding_cubit.dart';
 import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/product_bloc.dart';
 import 'package:fake_ecommerce_app/src/features/settings/presentation/cubit/settings_cubit.dart';
+import 'package:fake_ecommerce_app/src/features/user/presentation/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<LoginBloc>()),
         BlocProvider(create: (context) => sl<ProductBloc>()),
         BlocProvider(create: (context) => sl<CategoryBloc>()),
+        BlocProvider(create: (context) => sl<UserBloc>()),
         BlocProvider(create: (context) => SettingsCubit()),
       ],
       child: BlocConsumer<SettingsCubit, SettingsState>(
