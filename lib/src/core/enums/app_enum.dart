@@ -3,3 +3,8 @@ enum LocalStorageKey {
   token,
   isDark,
 }
+
+enum PageType{
+  add,
+  update,
+}

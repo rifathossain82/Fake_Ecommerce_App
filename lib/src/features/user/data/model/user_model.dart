@@ -56,8 +56,13 @@ class Address {
   int? number;
   String? zipcode;
 
-  Address(
-      {this.geolocation, this.city, this.street, this.number, this.zipcode});
+  Address({
+    this.geolocation,
+    this.city,
+    this.street,
+    this.number,
+    this.zipcode,
+  });
 
   Address.fromJson(Map<String, dynamic> json) {
     geolocation = json['geolocation'] != null

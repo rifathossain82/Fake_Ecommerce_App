@@ -26,17 +26,18 @@ class _SplashScreenState extends State<SplashPage> {
 
   void pageNavigation() async {
     final localStorage = sl<LocalStorage>();
-    bool isOnBoardingViewed = localStorage.getData(key: LocalStorageKey.onBoarding) ?? false;
+    bool isOnBoardingViewed =
+        localStorage.getData(key: LocalStorageKey.onBoarding) ?? false;
     var token = localStorage.getData(key: LocalStorageKey.token);
-    if(!mounted) return;
+    if (!mounted) return;
     if (isOnBoardingViewed) {
       if (token != null) {
-        context.pushNamedAndRemoveUntil(RouteGenerator.dashboard);
+        context.pushNamedAndRemoveUntil(routeName: RouteGenerator.dashboard);
       } else {
-        context.pushNamedAndRemoveUntil(RouteGenerator.login);
+        context.pushNamedAndRemoveUntil(routeName: RouteGenerator.login);
       }
     } else {
-      context.pushNamedAndRemoveUntil(RouteGenerator.onBoarding);
+      context.pushNamedAndRemoveUntil(routeName: RouteGenerator.onBoarding);
     }
   }
 

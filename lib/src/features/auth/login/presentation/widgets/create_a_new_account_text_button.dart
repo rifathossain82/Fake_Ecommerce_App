@@ -9,7 +9,7 @@ class CreateANewAccountTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushReplacementNamed(RouteGenerator.register);
+        context.pushReplacementNamed(routeName: RouteGenerator.register);
       },
       child: Padding(
         padding: const EdgeInsets.all(10),

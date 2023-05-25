@@ -90,14 +90,16 @@ class OnBoardingPage extends StatelessWidget {
                   KButton(
                     onPressed: () {
                       final localStorage = sl<LocalStorage>();
-                      localStorage.saveData(
-                        key: LocalStorageKey.onBoarding,
-                        data: true,
-                      ).then(
-                        (value) => context.pushNamedAndRemoveUntil(
-                          RouteGenerator.login,
-                        ),
-                      );
+                      localStorage
+                          .saveData(
+                            key: LocalStorageKey.onBoarding,
+                            data: true,
+                          )
+                          .then(
+                            (value) => context.pushNamedAndRemoveUntil(
+                              routeName: RouteGenerator.login,
+                            ),
+                          );
                     },
                     width: context.screenWidth - 30,
                     child: Text(

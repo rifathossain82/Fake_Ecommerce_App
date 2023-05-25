@@ -54,7 +54,9 @@ class DashboardPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
-              onPressed: () => context.pushNamed(RouteGenerator.settings),
+              onPressed: () => context.pushNamed(
+                routeName: RouteGenerator.settings,
+              ),
               icon: const Icon(
                 Icons.settings_rounded,
               ),

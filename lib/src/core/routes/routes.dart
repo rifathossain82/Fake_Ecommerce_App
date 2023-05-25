@@ -4,6 +4,7 @@ import 'package:fake_ecommerce_app/src/features/dashboard/presentation/pages/das
 import 'package:fake_ecommerce_app/src/features/on_boarding/presentation/pages/on_boarding_page.dart';
 import 'package:fake_ecommerce_app/src/features/settings/presentation/pages/settings_page.dart';
 import 'package:fake_ecommerce_app/src/features/splash/presentation/pages/splash_page.dart';
+import 'package:fake_ecommerce_app/src/features/user/presentation/pages/add_or_update_user_page.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {

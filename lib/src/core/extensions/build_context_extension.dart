@@ -71,21 +71,34 @@ extension BuildContextExtension on BuildContext {
         (route) => false,
       );
 
-  Future pushNamed(String routeName) => Navigator.pushNamed(
+  Future pushNamed({
+    required String routeName,
+    dynamic arguments,
+  }) =>
+      Navigator.pushNamed(
         this,
         routeName,
+        arguments: arguments,
       );
 
-  Future pushReplacementNamed(String routeName) =>
+  Future pushReplacementNamed({
+    required String routeName,
+    dynamic arguments,
+  }) =>
       Navigator.pushReplacementNamed(
         this,
         routeName,
+        arguments: arguments,
       );
 
-  Future pushNamedAndRemoveUntil(String routeName) =>
+  Future pushNamedAndRemoveUntil({
+    required String routeName,
+    dynamic arguments,
+  }) =>
       Navigator.pushNamedAndRemoveUntil(
         this,
         routeName,
         (route) => false,
+        arguments: arguments,
       );
 }

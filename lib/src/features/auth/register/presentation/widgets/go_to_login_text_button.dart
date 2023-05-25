@@ -9,7 +9,7 @@ class GoToLoginTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushReplacementNamed(RouteGenerator.login);
+        context.pushReplacementNamed(routeName: RouteGenerator.login);
       },
       child: Padding(
         padding: const EdgeInsets.all(10),

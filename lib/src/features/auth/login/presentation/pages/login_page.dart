@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
             message: 'Login Success!',
             bgColor: successColor,
           );
-          context.pushNamedAndRemoveUntil(RouteGenerator.dashboard);
+          context.pushNamedAndRemoveUntil(routeName: RouteGenerator.dashboard);
         }
       }, builder: (context, state) {
         if (state is LoginLoading) {
