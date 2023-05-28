@@ -1,6 +1,5 @@
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
-import 'package:fake_ecommerce_app/src/core/widgets/k_floating_action_button.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/no_data_found.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/shimmer_grid_view_builder.dart';
 import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/product_bloc.dart';
@@ -20,9 +19,6 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<ProductBloc>().add(event);
     return Scaffold(
-      floatingActionButton: KFloatingActionButton(
-        onPressed: () {},
-      ),
       body: RefreshIndicator(
         onRefresh: () async {
           context.read<ProductBloc>().isProductListLoaded = false;

@@ -210,7 +210,7 @@ class UserDetailsWidget extends StatelessWidget {
                       height: 20,
                       width: 20,
                       child: CircularProgressIndicator(
-                        color: kPrimarySwatchColor,
+                        color: kLightPrimaryColor,
                       ),
                     );
                   } else {

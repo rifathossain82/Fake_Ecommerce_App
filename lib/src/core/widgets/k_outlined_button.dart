@@ -30,7 +30,7 @@ class KOutlinedButton extends StatelessWidget {
         side: BorderSide(
           color: context.isDark
               ? borderColor ?? kWhite
-              : borderColor ?? kPrimarySwatchColor,
+              : borderColor ?? kLightPrimaryColor,
         ),
         borderRadius: BorderRadius.circular(borderRadius ?? 5),
       ),

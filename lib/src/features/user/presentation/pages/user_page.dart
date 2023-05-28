@@ -28,7 +28,7 @@ class UserPage extends StatelessWidget {
               ),
             ),
           ).then((value) {
-            if(value != null && value == true){
+            if (value != null && value == true) {
               context.read<UserBloc>().isUserListLoaded = false;
               context.read<UserBloc>().add(GetUserList());
             }

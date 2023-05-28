@@ -56,7 +56,7 @@ Future<bool?> kConfirmDialog({
           ),
           icon: Icon(
             Icons.question_mark,
-            color: kPrimarySwatchColor,
+            color: kLightPrimaryColor,
           ),
           title: Text(
             title,

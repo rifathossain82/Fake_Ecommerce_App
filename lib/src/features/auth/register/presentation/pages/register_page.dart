@@ -88,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildNameTextFiled() => KTextFormFiled(
+  Widget _buildNameTextFiled() => KTextFormField(
         controller: nameController,
         labelText: 'Name',
         inputAction: TextInputAction.next,
@@ -101,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       );
 
-  Widget _buildEmailTextFiled() => KTextFormFiled(
+  Widget _buildEmailTextFiled() => KTextFormField(
         controller: emailController,
         labelText: 'Email',
         inputAction: TextInputAction.next,
@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       );
 
-  Widget _buildPhoneTextFiled() => KTextFormFiled(
+  Widget _buildPhoneTextFiled() => KTextFormField(
         controller: phoneController,
         labelText: 'Phone',
         inputAction: TextInputAction.next,
@@ -131,7 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       );
 
-  Widget _buildPasswordTextFiled() => KTextFormFiled(
+  Widget _buildPasswordTextFiled() => KTextFormField(
         controller: passwordController,
         labelText: 'Password',
         inputAction: TextInputAction.done,

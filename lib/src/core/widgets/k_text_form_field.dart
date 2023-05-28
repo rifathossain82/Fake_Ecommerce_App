@@ -1,8 +1,7 @@
-import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:flutter/material.dart';
 
-class KTextFormFiled extends StatelessWidget {
-  const KTextFormFiled({
+class KTextFormField extends StatelessWidget {
+  const KTextFormField({
     Key? key,
     required this.controller,
     this.validator,
@@ -51,13 +50,7 @@ class KTextFormFiled extends StatelessWidget {
         isDense: true,
         hintText: hintText,
         labelText: labelText,
-        border: isBorder
-            ? OutlineInputBorder(
-          borderSide: BorderSide(
-            color: kGreyTextColor,
-          ),
-        )
-            : InputBorder.none,
+        border: isBorder ? const OutlineInputBorder() : InputBorder.none,
         suffixIcon: suffix,
         prefixIcon: prefixIcon,
       ),

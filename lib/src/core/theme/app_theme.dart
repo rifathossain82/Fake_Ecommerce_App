@@ -7,7 +7,7 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: kPrimarySwatchColor,
+    primarySwatch: kLightPrimarySwatchColor,
     primaryColor: kLightPrimaryColor,
     scaffoldBackgroundColor: kLightScaffoldBgColor,
     appBarTheme: AppBarTheme(
@@ -18,6 +18,7 @@ class AppTheme {
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: kLightPrimaryColor,
       foregroundColor: kWhite,
+
     ),
     textTheme: GoogleFonts.poppinsTextTheme(Typography.blackCupertino),
     checkboxTheme: CheckboxThemeData(
@@ -39,7 +40,7 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primarySwatch: kPrimarySwatchColor,
+    primarySwatch: kDarkPrimarySwatchColor,
     primaryColor: kDarkPrimaryColor,
     scaffoldBackgroundColor: kDarkScaffoldBgColor,
     appBarTheme: AppBarTheme(
