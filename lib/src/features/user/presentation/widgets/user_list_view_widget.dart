@@ -1,4 +1,3 @@
-import 'package:fake_ecommerce_app/src/features/category/presentation/widgets/category_item_builder.dart';
 import 'package:fake_ecommerce_app/src/features/user/data/model/user_model.dart';
 import 'package:fake_ecommerce_app/src/features/user/presentation/widgets/user_item_builder.dart';
 import 'package:flutter/material.dart';

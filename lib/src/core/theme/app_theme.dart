@@ -52,8 +52,8 @@ class AppTheme {
       trackColor: MaterialStatePropertyAll(kGrey),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: kDarkPrimaryColor,
-      foregroundColor: kWhite,
+      backgroundColor: kWhite,
+      foregroundColor: kDarkPrimaryColor,
     ),
     textTheme: GoogleFonts.poppinsTextTheme(Typography.whiteCupertino),
     checkboxTheme: CheckboxThemeData(

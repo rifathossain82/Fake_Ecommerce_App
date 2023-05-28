@@ -60,6 +60,50 @@ class Network {
     return response;
   }
 
+  static Future<http.Response> putRequest({required String api, body}) async {
+    if (!await hasInternet) {
+      throw Message.noInternet;
+    }
+
+    kPrint('\nYou hit: $api');
+    kPrint('Request Body: ${jsonEncode(body)}');
+
+    var headers = {
+      'Accept': 'application/json',
+      "Authorization":
+      "Bearer ${_localStorage.getData(key: LocalStorageKey.token)}"
+    };
+
+    http.Response response = await http.put(
+      Uri.parse(api),
+      body: body,
+      headers: headers,
+    );
+    return response;
+  }
+
+  static Future<http.Response> deleteRequest({required String api, body}) async {
+    if (!await hasInternet) {
+      throw Message.noInternet;
+    }
+
+    kPrint('\nYou hit: $api');
+    kPrint('Request Body: ${jsonEncode(body)}');
+
+    var headers = {
+      'Accept': 'application/json',
+      "Authorization":
+      "Bearer ${_localStorage.getData(key: LocalStorageKey.token)}"
+    };
+
+    http.Response response = await http.delete(
+      Uri.parse(api),
+      body: body,
+      headers: headers,
+    );
+    return response;
+  }
+
   static multipartAddRequest({
     required String api,
     required Map<String, String> body,

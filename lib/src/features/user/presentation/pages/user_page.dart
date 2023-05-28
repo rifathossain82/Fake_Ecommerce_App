@@ -1,3 +1,4 @@
+import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
@@ -18,11 +19,21 @@ class UserPage extends StatelessWidget {
     context.read<UserBloc>().add(GetUserList());
     return Scaffold(
       floatingActionButton: KFloatingActionButton(
-        onPressed: () => context.push(
-          const AddOrUpdateUserPage(
-            pageType: PageType.add,
-          ),
-        ),
+        onPressed: () async {
+          context.push(
+            BlocProvider(
+              create: (context) => sl<UserBloc>(),
+              child: const AddOrUpdateUserPage(
+                pageType: PageType.add,
+              ),
+            ),
+          ).then((value) {
+            if(value != null && value == true){
+              context.read<UserBloc>().isUserListLoaded = false;
+              context.read<UserBloc>().add(GetUserList());
+            }
+          });
+        },
       ),
       body: RefreshIndicator(
         onRefresh: () async {

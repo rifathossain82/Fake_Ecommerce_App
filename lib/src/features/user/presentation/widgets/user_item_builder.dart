@@ -1,6 +1,7 @@
 import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/string_extension.dart';
+import 'package:fake_ecommerce_app/src/core/helpers/helper_methods.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/box_shadow.dart';
 import 'package:fake_ecommerce_app/src/features/user/data/model/user_model.dart';
@@ -26,7 +27,11 @@ class UserItemBuilder extends StatelessWidget {
             create: (context) => sl<UserBloc>(),
             child: UserDetailsPage(userId: user.id!),
           ),
-        );
+        ).then((value){
+          if(value != null && value == true){
+            sl<UserBloc>().add(GetUserList());
+          }
+        });
       },
       child: Container(
         decoration: BoxDecoration(

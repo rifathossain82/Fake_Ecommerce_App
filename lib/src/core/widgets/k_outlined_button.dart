@@ -27,7 +27,11 @@ class KOutlinedButton extends StatelessWidget {
     return MaterialButton(
       onPressed: onPressed,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: borderColor ?? kPrimarySwatchColor),
+        side: BorderSide(
+          color: context.isDark
+              ? borderColor ?? kWhite
+              : borderColor ?? kPrimarySwatchColor,
+        ),
         borderRadius: BorderRadius.circular(borderRadius ?? 5),
       ),
       color: bgColor,

@@ -13,4 +13,16 @@ class UserUseCase {
   Future<UserModel> getUserDetails(int userId) async {
     return await userRepository.getUserDetails(userId);
   }
+
+  Future<String> addUser(Map<String, dynamic> requestBody) async {
+    return await userRepository.addUser(requestBody);
+  }
+
+  Future<String> updateUser(Map<String, dynamic> requestBody) async {
+    return await userRepository.updateUser(requestBody);
+  }
+
+  Future<String> deleteUser(Map<String, dynamic> requestBody) async {
+    return await userRepository.deleteUser(requestBody);
+  }
 }

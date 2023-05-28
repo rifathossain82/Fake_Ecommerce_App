@@ -32,7 +32,7 @@ extension BuildContextExtension on BuildContext {
   TextStyle get outlinedButtonTextStyle =>
       Theme.of(this).textTheme.titleMedium!.copyWith(
             fontWeight: FontWeight.bold,
-            color: kPrimarySwatchColor,
+            color: isDark ? kWhite : kDarkPrimaryColor,
           );
 
   bool get isDark => Theme.of(this).brightness == Brightness.dark;
@@ -48,6 +48,8 @@ extension BuildContextExtension on BuildContext {
           backgroundColor: bgColor,
         ),
       );
+
+  void pop({dynamic result}) => Navigator.of(this).pop(result);
 
   Future push(Widget nextPage) => Navigator.push(
         this,

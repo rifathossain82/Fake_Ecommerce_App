@@ -1,3 +1,4 @@
+import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_custom_loader.dart';
@@ -39,10 +40,13 @@ class UserDetailsPage extends StatelessWidget {
                 }
               },
               builder: (context, state) {
-                if (state is UserInitial || state is UserLoading) {
+                if (state is UserDetailsLoading) {
                   return const KCustomLoader();
                 } else if (state is UserDetailsLoaded) {
-                  return UserDetailsWidget(user: state.user);
+                  return BlocProvider(
+                    create: (context) => sl<UserBloc>(),
+                    child: UserDetailsWidget(user: state.user),
+                  );
                 } else {
                   return const NoDataFound();
                 }

@@ -28,4 +28,22 @@ class UserRepositoryImpl implements UserRepository {
     UserModel user = UserModel.fromJson(responseBody);
     return user;
   }
+
+  @override
+  Future<String> addUser(Map<String, dynamic> requestBody) async {
+    await dataSource.addUser(requestBody);
+    return 'User Added Successfully!';
+  }
+
+  @override
+  Future<String> updateUser(Map<String, dynamic> requestBody) async {
+    await dataSource.updateUser(requestBody);
+    return 'User Updated Successfully!';
+  }
+
+  @override
+  Future<String> deleteUser(Map<String, dynamic> requestBody) async {
+    await dataSource.deleteUser(requestBody);
+    return 'User Deleted Successfully!';
+  }
 }

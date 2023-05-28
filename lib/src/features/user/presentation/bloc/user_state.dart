@@ -23,6 +23,11 @@ class UserLoaded extends UserState {
   List<Object> get props => [userList];
 }
 
+class UserDetailsLoading extends UserState {
+  @override
+  List<Object> get props => [];
+}
+
 class UserDetailsLoaded extends UserState {
   final UserModel user;
 
@@ -30,6 +35,33 @@ class UserDetailsLoaded extends UserState {
 
   @override
   List<Object> get props => [user];
+}
+
+class UserAddedSuccess extends UserState {
+  final String message;
+
+  const UserAddedSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class UserUpdateSuccess extends UserState {
+  final String message;
+
+  const UserUpdateSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class UserDeleteSuccess extends UserState {
+  final String message;
+
+  const UserDeleteSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
 }
 
 class UserError extends UserState {
