@@ -6,15 +6,17 @@ class ProductUseCase {
 
   ProductUseCase({required this.productRepository});
 
-  Future<List<ProductModel>> getProductList() async {
-    return await productRepository.getProductList();
+  Future<List<ProductModel>> getProductList(Map<String, dynamic> params) async {
+    return await productRepository.getProductList(params);
   }
 
   Future<List<ProductModel>> getCategoryWiseProduct({
     required String categoryName,
+    Map<String, dynamic>? params,
   }) async {
     return await productRepository.getCategoryWiseProducts(
       categoryName: categoryName,
+      params: params,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -19,8 +20,8 @@ class KShimmerContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: kShimmerBaseColor,
-      highlightColor: kShimmerHighlightColor,
+      baseColor: context.isDark ? kDarkPrimaryColor : kShimmerBaseColor,
+      highlightColor: context.isDark ? kDarkScaffoldBgColor : kShimmerHighlightColor,
       period: const Duration(seconds: 1),
       child: Container(
         height: height,

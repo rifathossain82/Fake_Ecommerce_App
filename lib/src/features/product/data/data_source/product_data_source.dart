@@ -1,5 +1,8 @@
 abstract class ProductDataSource {
-  Future fetchProductList();
+  Future fetchProductList(Map<String, dynamic> params);
 
-  Future fetchCategoryWiseProducts({required String categoryName});
+  Future fetchCategoryWiseProducts({
+    required String categoryName,
+    Map<String, dynamic>? params,
+  });
 }

@@ -8,8 +8,8 @@ class ProductRepositoryImpl implements ProductRepository {
   const ProductRepositoryImpl({required this.dataSource});
 
   @override
-  Future<List<ProductModel>> getProductList() async {
-    dynamic responseBody = await dataSource.fetchProductList();
+  Future<List<ProductModel>> getProductList(Map<String, dynamic> params) async {
+    dynamic responseBody = await dataSource.fetchProductList(params);
 
     final List<ProductModel> productList = [];
     if (responseBody != null) {
@@ -22,8 +22,14 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<List<ProductModel>> getCategoryWiseProducts({required String categoryName}) async {
-    dynamic responseBody = await dataSource.fetchCategoryWiseProducts(categoryName: categoryName);
+  Future<List<ProductModel>> getCategoryWiseProducts({
+    required String categoryName,
+    Map<String, dynamic>? params,
+  }) async {
+    dynamic responseBody = await dataSource.fetchCategoryWiseProducts(
+      categoryName: categoryName,
+      params: params,
+    );
 
     final List<ProductModel> productList = [];
     if (responseBody != null) {

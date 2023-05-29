@@ -4,10 +4,11 @@ import 'package:fake_ecommerce_app/src/features/product/data/data_source/product
 
 class ProductDataSourceImpl implements ProductDataSource {
   @override
-  Future fetchProductList() async {
+  Future fetchProductList(Map<String, dynamic> params) async {
     dynamic responseBody = await Network.handleResponse(
       await Network.getRequest(
         api: Api.getProduct,
+        params: params,
       ),
     );
 
@@ -15,10 +16,14 @@ class ProductDataSourceImpl implements ProductDataSource {
   }
 
   @override
-  Future fetchCategoryWiseProducts({required String categoryName}) async {
+  Future fetchCategoryWiseProducts({
+    required String categoryName,
+    Map<String, dynamic>? params,
+  }) async {
     dynamic responseBody = await Network.handleResponse(
       await Network.getRequest(
         api: Api.getCategoryWiseProduct(categoryName),
+        params: params,
       ),
     );
 

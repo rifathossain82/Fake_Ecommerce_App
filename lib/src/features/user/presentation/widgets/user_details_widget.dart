@@ -206,12 +206,10 @@ class UserDetailsWidget extends StatelessWidget {
                 },
                 builder: (context, state) {
                   if (state is UserLoading) {
-                    return SizedBox(
+                    return const SizedBox(
                       height: 20,
                       width: 20,
-                      child: CircularProgressIndicator(
-                        color: kLightPrimaryColor,
-                      ),
+                      child: CircularProgressIndicator(),
                     );
                   } else {
                     return Row(
