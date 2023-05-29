@@ -8,8 +8,8 @@ class UserRepositoryImpl implements UserRepository {
   const UserRepositoryImpl({required this.dataSource});
 
   @override
-  Future<List<UserModel>> getUserList() async {
-    dynamic responseBody = await dataSource.fetchUserList();
+  Future<List<UserModel>> getUserList(Map<String, dynamic> params) async {
+    dynamic responseBody = await dataSource.fetchUserList(params);
 
     final List<UserModel> userList = [];
     if (responseBody != null) {

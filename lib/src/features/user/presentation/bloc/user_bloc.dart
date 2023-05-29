@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fake_ecommerce_app/src/core/helpers/helper_methods.dart';
+import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/features/user/data/model/user_model.dart';
 import 'package:fake_ecommerce_app/src/features/user/domain/use_case/user_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +10,29 @@ part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserUseCase useCase;
+
   bool isUserListLoaded = false;
+
+  String? limit;
+  SortingType? selectedSorting;
+
+  void updateLimit(String value){
+    limit = value;
+  }
+
+  void updateSorting(SortingType type){
+    selectedSorting = type;
+  }
+
+  void clearFiltering(){
+    limit = null;
+    selectedSorting = null;
+  }
+
+  void reloadUserList(){
+    isUserListLoaded = false;
+    add(GetUserList());
+  }
 
   UserBloc({required this.useCase}) : super(UserInitial()) {
     on<UserEvent>(_onUserEvent);
@@ -21,7 +43,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       try {
         if (!isUserListLoaded) {
           emit(UserLoading());
-          final List<UserModel> userList = await useCase.getUserList();
+
+          final Map<String, dynamic> params = {
+            'limit' : '$limit',
+            'sort' : '${selectedSorting?.name}',
+          };
+
+          final List<UserModel> userList = await useCase.getUserList(params);
           isUserListLoaded = true;
           emit(UserLoaded(userList: userList));
         }

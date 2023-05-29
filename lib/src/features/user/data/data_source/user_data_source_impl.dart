@@ -6,10 +6,11 @@ import 'package:fake_ecommerce_app/src/features/user/data/data_source/user_data_
 
 class UserDataSourceImpl implements UserDataSource {
   @override
-  Future fetchUserList() async {
+  Future fetchUserList(Map<String, dynamic> params) async {
     dynamic responseBody = await Network.handleResponse(
       await Network.getRequest(
         api: Api.getUsers,
+        params: params,
       ),
     );
 

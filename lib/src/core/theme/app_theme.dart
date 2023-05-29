@@ -11,8 +11,8 @@ class AppTheme {
     primaryColor: kLightPrimaryColor,
     scaffoldBackgroundColor: kLightScaffoldBgColor,
     appBarTheme: AppBarTheme(
-      foregroundColor: kWhite,
-      backgroundColor: kLightPrimaryColor,
+      foregroundColor: kLightPrimaryColor,
+      backgroundColor: kLightScaffoldBgColor,
       elevation: 0,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -45,7 +45,7 @@ class AppTheme {
     scaffoldBackgroundColor: kDarkScaffoldBgColor,
     appBarTheme: AppBarTheme(
       foregroundColor: kWhite,
-      backgroundColor: kDarkPrimaryColor,
+      backgroundColor: kDarkScaffoldBgColor,
       elevation: 0,
     ),
     switchTheme: SwitchThemeData(

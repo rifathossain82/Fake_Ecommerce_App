@@ -6,8 +6,8 @@ class UserUseCase {
 
   const UserUseCase({required this.userRepository});
 
-  Future<List<UserModel>> getUserList() async {
-    return await userRepository.getUserList();
+  Future<List<UserModel>> getUserList(Map<String, dynamic> params) async {
+    return await userRepository.getUserList(params);
   }
 
   Future<UserModel> getUserDetails(int userId) async {

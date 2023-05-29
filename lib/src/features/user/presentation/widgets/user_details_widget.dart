@@ -200,7 +200,7 @@ class UserDetailsWidget extends StatelessWidget {
                     );
 
                     /// when user delete success then pop the screen
-                    /// with result true
+                    /// with result true for reload user list in user page
                     context.pop(result: true);
                   }
                 },
@@ -248,8 +248,13 @@ class UserDetailsWidget extends StatelessWidget {
       ),
     ).then((value) {
       if (value != null && value == true) {
+        /// reload user details after editing
         context.read<UserBloc>().add(GetUserDetails(userId: user.id!));
-        context.read<UserBloc>().add(GetUserList());
+
+        /// clear all filtering values
+        /// then reload user list to show updated user data
+        context.read<UserBloc>().clearFiltering();
+        context.read<UserBloc>().reloadUserList();
       }
     });
   }

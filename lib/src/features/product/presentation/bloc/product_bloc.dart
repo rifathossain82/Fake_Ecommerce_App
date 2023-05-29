@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/features/product/data/models/product_model.dart';
 import 'package:fake_ecommerce_app/src/features/product/domain/use_case/product_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,18 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductUseCase productUseCase;
   /// Track whether the product list has been loaded
   bool isProductListLoaded = false;
+
+  int? limit;
+  SortingType? selectedSorting;
+
+  void updateLimit(int value){
+    limit = value;
+  }
+
+  void updateSorting(SortingType type){
+    selectedSorting = type;
+  }
+
   ProductBloc({required this.productUseCase}) : super(ProductInitial()) {
     on<ProductEvent>(_onProductEvent);
   }

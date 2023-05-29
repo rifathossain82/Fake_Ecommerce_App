@@ -48,7 +48,7 @@ class DashboardPage extends StatelessWidget {
         title: Image.asset(
           AssetPath.logo,
           height: 20,
-          color: kWhite,
+          color: context.isDark ? kWhite : kLightPrimaryColor,
         ),
         actions: [
           Padding(

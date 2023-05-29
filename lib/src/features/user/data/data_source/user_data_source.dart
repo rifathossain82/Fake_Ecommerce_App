@@ -1,5 +1,5 @@
 abstract class UserDataSource {
-  Future fetchUserList();
+  Future fetchUserList(Map<String, dynamic> params);
 
   Future fetchUserDetails(int userId);
 
