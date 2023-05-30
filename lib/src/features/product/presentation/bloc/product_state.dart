@@ -23,11 +23,52 @@ class ProductLoaded extends ProductState {
   List<Object> get props => [productList];
 }
 
+class ProductDetailsLoading extends ProductState {
+  @override
+  List<Object> get props => [];
+}
+
+class ProductDetailsLoaded extends ProductState {
+  final ProductModel product;
+
+  const ProductDetailsLoaded(this.product);
+
+  @override
+  List<Object> get props => [product];
+}
+
 class ProductError extends ProductState {
   final String message;
 
   const ProductError(this.message);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message];
+}
+
+class ProductAddedSuccess extends ProductState {
+  final String message;
+
+  const ProductAddedSuccess(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class ProductUpdatedSuccess extends ProductState {
+  final String message;
+
+  const ProductUpdatedSuccess(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class ProductDeletedSuccess extends ProductState {
+  final String message;
+
+  const ProductDeletedSuccess(this.message);
+
+  @override
+  List<Object> get props => [message];
 }

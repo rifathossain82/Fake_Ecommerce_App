@@ -22,6 +22,13 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
+  Future<ProductModel> getProductDetails(int productId) async {
+    dynamic responseBody = await dataSource.fetchProductDetails(productId);
+
+    return ProductModel.fromJson(responseBody);
+  }
+
+  @override
   Future<List<ProductModel>> getCategoryWiseProducts({
     required String categoryName,
     Map<String, dynamic>? params,
@@ -39,5 +46,23 @@ class ProductRepositoryImpl implements ProductRepository {
     }
 
     return productList;
+  }
+
+  @override
+  Future<String> addProduct(Map<String, dynamic> requestBody) async {
+    await dataSource.addProduct(requestBody);
+    return 'Product Added Successfully!';
+  }
+
+  @override
+  Future<String> updateProduct(Map<String, dynamic> requestBody) async {
+    await dataSource.updateProduct(requestBody);
+    return 'Product Updated Successfully!';
+  }
+
+  @override
+  Future<String> deleteProduct(int productId) async {
+    await dataSource.deleteProduct(productId);
+    return 'Product Deleted Successfully!';
   }
 }

@@ -112,14 +112,15 @@ class _UserPageState extends State<UserPage> {
   }
 
   void onRefreshMethod() {
+
+    /// clear filtering value from bloc and reload user list
+    context.read<UserBloc>().clearFiltering();
+    context.read<UserBloc>().reloadUserList();
+
     /// clear the limit text field
     limitTextController.clear();
 
     /// to unFocus dropdown field
     focusScopeNode.unfocus();
-
-    /// clear filtering value from bloc and reload user list
-    context.read<UserBloc>().clearFiltering();
-    context.read<UserBloc>().reloadUserList();
   }
 }

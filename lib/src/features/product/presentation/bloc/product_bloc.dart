@@ -55,6 +55,18 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       } catch (e) {
         emit(ProductError('$e'));
       }
+    } else if (event is GetProductDetails) {
+      try {
+        emit(ProductDetailsLoading());
+
+        final ProductModel product = await productUseCase.getProductDetails(
+          event.productId,
+        );
+
+        emit(ProductDetailsLoaded(product));
+      } catch (e) {
+        emit(ProductError('$e'));
+      }
     } else if (event is GetCategoryWiseProduct) {
       try {
         emit(ProductLoading());
@@ -70,6 +82,30 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
 
         emit(ProductLoaded(productList));
+      } catch (e) {
+        emit(ProductError('$e'));
+      }
+    } else if (event is AddProduct) {
+      try {
+        emit(ProductLoading());
+        var message = await productUseCase.addProduct(event.requestBody);
+        emit(ProductAddedSuccess(message));
+      } catch (e) {
+        emit(ProductError('$e'));
+      }
+    } else if (event is UpdateProduct) {
+      try {
+        emit(ProductLoading());
+        var message = await productUseCase.updateProduct(event.requestBody);
+        emit(ProductUpdatedSuccess(message));
+      } catch (e) {
+        emit(ProductError('$e'));
+      }
+    } else if (event is DeleteProduct) {
+      try {
+        emit(ProductLoading());
+        var message = await productUseCase.deleteProduct(event.productId);
+        emit(ProductDeletedSuccess(message));
       } catch (e) {
         emit(ProductError('$e'));
       }

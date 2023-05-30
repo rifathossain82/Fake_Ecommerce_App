@@ -1,3 +1,4 @@
+import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/app_constants.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
@@ -5,8 +6,10 @@ import 'package:fake_ecommerce_app/src/core/widgets/box_shadow.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/cached_network_image_builder.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/star_rating_builder.dart';
 import 'package:fake_ecommerce_app/src/features/product/data/models/product_model.dart';
+import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/product_bloc.dart';
 import 'package:fake_ecommerce_app/src/features/product/presentation/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductItemBuilder extends StatelessWidget {
   final ProductModel product;
@@ -19,7 +22,12 @@ class ProductItemBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push(ProductDetailsPage(product: product)),
+      onTap: () => context.push(
+        BlocProvider(
+          create: (context) => sl<ProductBloc>(),
+          child: ProductDetailsPage(productId: product.id!),
+        ),
+      ),
       child: Container(
         decoration: BoxDecoration(
           color: context.isDark ? context.primaryColor : kWhite,

@@ -43,7 +43,12 @@ extension BuildContextExtension on BuildContext {
   }) =>
       ScaffoldMessenger.of(this).showSnackBar(
         SnackBar(
-          content: Text(message),
+          content: Text(
+            message,
+            style: TextStyle(
+              color: kWhite,
+            ),
+          ),
           duration: const Duration(seconds: 1),
           backgroundColor: bgColor,
         ),

@@ -10,6 +10,10 @@ class ProductUseCase {
     return await productRepository.getProductList(params);
   }
 
+  Future<ProductModel> getProductDetails(int productId)async{
+    return await productRepository.getProductDetails(productId);
+  }
+
   Future<List<ProductModel>> getCategoryWiseProduct({
     required String categoryName,
     Map<String, dynamic>? params,
@@ -18,5 +22,17 @@ class ProductUseCase {
       categoryName: categoryName,
       params: params,
     );
+  }
+
+  Future<String> addProduct(Map<String, dynamic> requestBody)async{
+    return await productRepository.addProduct(requestBody);
+  }
+
+  Future<String> updateProduct(Map<String, dynamic> requestBody)async{
+    return await productRepository.updateProduct(requestBody);
+  }
+
+  Future<String> deleteProduct(int productId)async{
+    return await productRepository.deleteProduct(productId);
   }
 }

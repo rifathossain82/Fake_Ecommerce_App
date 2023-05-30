@@ -1,3 +1,5 @@
+import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
+import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/helpers/helper_methods.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
@@ -5,6 +7,7 @@ import 'package:fake_ecommerce_app/src/core/widgets/filter_widget.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/no_data_found.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/shimmer_grid_view_builder.dart';
 import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/product_bloc.dart';
+import 'package:fake_ecommerce_app/src/features/product/presentation/pages/add_or_update_product_page.dart';
 import 'package:fake_ecommerce_app/src/features/product/presentation/widgets/product_gridview_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -100,32 +103,32 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   void addButtonMethod() async {
-    // context
-    //     .push(
-    //   BlocProvider(
-    //     create: (context) => sl<UserBloc>(),
-    //     child: const AddOrUpdateUserPage(
-    //       pageType: PageType.add,
-    //     ),
-    //   ),
-    // )
-    //     .then((value) {
-    //   if (value != null && value == true) {
-    //     onRefreshMethod();
-    //   }
-    // });
+    context.push(
+      BlocProvider(
+        create: (context) => sl<ProductBloc>(),
+        child: const AddOrUpdateProductPage(
+          pageType: PageType.add,
+        ),
+      ),
+    ).then((value) {
+      if (value != null && value == true) {
+        onRefreshMethod();
+      }
+    });
   }
 
   void onRefreshMethod() {
+
+    /// clear filtering value from bloc and reload product list
+    context.read<ProductBloc>().clearFiltering();
+    reloadProducts();
+
+
     /// clear the limit text field
     limitTextController.clear();
 
     /// to unFocus dropdown field
     focusScopeNode.unfocus();
-
-    /// clear filtering value from bloc and reload product list
-    context.read<ProductBloc>().clearFiltering();
-    reloadProducts();
   }
 
   void reloadProducts() {
