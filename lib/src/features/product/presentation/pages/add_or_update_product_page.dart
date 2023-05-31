@@ -67,7 +67,7 @@ class _AddOrUpdateProductPageState extends State<AddOrUpdateProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.pageType.name.capitalizedFirst} User'),
+        title: Text('${widget.pageType.name.capitalizedFirst} Product'),
       ),
       body: Stack(
         alignment: Alignment.bottomCenter,

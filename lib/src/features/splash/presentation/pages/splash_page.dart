@@ -7,7 +7,6 @@ import 'package:fake_ecommerce_app/src/core/services/local_storage.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_logo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -17,6 +16,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashPage> {
+
   setSplashDuration() async {
     return Timer(
       const Duration(seconds: 3),
@@ -26,8 +26,7 @@ class _SplashScreenState extends State<SplashPage> {
 
   void pageNavigation() async {
     final localStorage = sl<LocalStorage>();
-    bool isOnBoardingViewed =
-        localStorage.getData(key: LocalStorageKey.onBoarding) ?? false;
+    bool isOnBoardingViewed = localStorage.getData(key: LocalStorageKey.onBoarding) ?? false;
     var token = localStorage.getData(key: LocalStorageKey.token);
     if (!mounted) return;
     if (isOnBoardingViewed) {
@@ -46,14 +45,6 @@ class _SplashScreenState extends State<SplashPage> {
     /// set duration and control what next after splash duration
     setSplashDuration();
 
-    /// set primary color as a status bar color only for splash screen
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
-      ),
-    );
     super.initState();
   }
 

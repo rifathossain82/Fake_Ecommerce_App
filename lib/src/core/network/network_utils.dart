@@ -10,7 +10,6 @@ import 'package:http/http.dart' as http;
 final _localStorage = sl<LocalStorage>();
 
 class Network {
-
   static Future<http.Response> getRequest({required String api, params}) async {
     if (!await hasInternet) {
       throw Message.noInternet;
@@ -71,7 +70,7 @@ class Network {
     var headers = {
       'Accept': 'application/json',
       "Authorization":
-      "Bearer ${_localStorage.getData(key: LocalStorageKey.token)}"
+          "Bearer ${_localStorage.getData(key: LocalStorageKey.token)}"
     };
 
     http.Response response = await http.put(
@@ -82,7 +81,8 @@ class Network {
     return response;
   }
 
-  static Future<http.Response> deleteRequest({required String api, body}) async {
+  static Future<http.Response> deleteRequest(
+      {required String api, body}) async {
     if (!await hasInternet) {
       throw Message.noInternet;
     }
@@ -93,7 +93,7 @@ class Network {
     var headers = {
       'Accept': 'application/json',
       "Authorization":
-      "Bearer ${_localStorage.getData(key: LocalStorageKey.token)}"
+          "Bearer ${_localStorage.getData(key: LocalStorageKey.token)}"
     };
 
     http.Response response = await http.delete(
@@ -158,7 +158,7 @@ class Network {
         }
       } else if (response.statusCode == 401) {
         _logout();
-        String msg = "Unauthorized";
+        String msg = Message.error401;
         if (response.body.isNotEmpty) {
           if (json.decode(response.body)['message'] != null) {
             msg = json.decode(response.body)['message'];
@@ -166,14 +166,14 @@ class Network {
         }
         throw msg;
       } else if (response.statusCode == 404) {
-        throw 'Page Not Found!';
+        throw Message.error404;
       } else if (response.statusCode == 500) {
-        throw "Server Error!";
+        throw Message.error500;
       } else {
         kPrint('ErrorCode: ${response.statusCode}');
         kPrint('ErrorResponse: ${response.body}');
 
-        String msg = "Something went wrong!";
+        String msg = Message.unknown;
         if (response.body.isNotEmpty) {
           var data = jsonDecode(response.body)['errors'];
           if (data == null) {
@@ -190,7 +190,7 @@ class Network {
     } on SocketException catch (_) {
       throw Message.noInternet;
     } on FormatException catch (_) {
-      throw "Bad response format!";
+      throw Message.badResponse;
     } catch (e) {
       throw e.toString();
     }
@@ -198,6 +198,5 @@ class Network {
 
   static void _logout() {
     _localStorage.removeData(key: LocalStorageKey.token);
-    // Get.offAll(() => const LoginScreen());
   }
 }

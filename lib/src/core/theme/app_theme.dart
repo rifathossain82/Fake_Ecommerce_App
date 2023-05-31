@@ -18,7 +18,6 @@ class AppTheme {
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: kLightPrimaryColor,
       foregroundColor: kWhite,
-
     ),
     textTheme: GoogleFonts.poppinsTextTheme(Typography.blackCupertino),
     checkboxTheme: CheckboxThemeData(
@@ -75,10 +74,5 @@ class AppTheme {
     iconTheme: IconThemeData(
       color: kWhite,
     ),
-    // progressIndicatorTheme: ProgressIndicatorThemeData(
-    //   color: kDarkPrimaryColor,
-    //   circularTrackColor: kWhite,
-    //   refreshBackgroundColor: kWhite,
-    // ),
   );
 }

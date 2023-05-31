@@ -25,14 +25,10 @@ Color kOrange = const Color(0xFFFFA800);
 Color kDeepOrange = const Color(0xFFFF5F2D);
 
 Color kShadowColor = const Color(0xFF616161).withOpacity(0.18);
-Color kRedShadowColor = const Color(0xFFfaebeb);
 Color kItemShadowColor = const Color(0xFF000000).withOpacity(0.10);
-Color kItemBlueShadowColor = const Color(0xFFEFF3FF);
-Color kItemBlueDarkShadowColor = const Color(0xFF171d30).withOpacity(0.8);
 Color kGreyTextColor = const Color(0xFFA5A5A5);
 Color kDividerColor = const Color(0xFFE8ECF2);
 Color kBlueGrey = const Color(0xFF7D8FAB);
-Color? kDarkBlueGrey = Colors.blueGrey[900];
 
 Color kShimmerBaseColor = Colors.grey.shade300;
 Color kShimmerHighlightColor = Colors.grey.shade100;
@@ -43,14 +39,6 @@ Color warningColor = Colors.orange;
 
 Color kLightScaffoldBgColor = Colors.white;
 Color kDarkScaffoldBgColor = const Color(0xFF222a3b);
-
-final List<Color> randomColors = [
-  Colors.red,
-  Colors.blue,
-  Colors.green,
-  Colors.teal,
-  Colors.purple,
-];
 
 Map<int, Color> lightMaterialColor = const {
   50: Color.fromRGBO(37, 49, 69, .1),

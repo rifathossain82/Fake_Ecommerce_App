@@ -52,7 +52,8 @@ class _UserPageState extends State<UserPage> {
                         context.read<UserBloc>().reloadUserList();
                       });
                     },
-                    selectedSortingType: context.read<UserBloc>().selectedSorting,
+                    selectedSortingType:
+                        context.read<UserBloc>().selectedSorting,
                     onChangedSorting: (value) {
                       context.read<UserBloc>().updateSorting(value);
                       context.read<UserBloc>().reloadUserList();
@@ -112,7 +113,6 @@ class _UserPageState extends State<UserPage> {
   }
 
   void onRefreshMethod() {
-
     /// clear filtering value from bloc and reload user list
     context.read<UserBloc>().clearFiltering();
     context.read<UserBloc>().reloadUserList();

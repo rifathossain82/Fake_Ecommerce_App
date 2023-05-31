@@ -12,12 +12,23 @@ import 'package:fake_ecommerce_app/src/features/product/presentation/bloc/produc
 import 'package:fake_ecommerce_app/src/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:fake_ecommerce_app/src/features/user/presentation/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
 
+  /// set transparent status bar for whole app
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ),
+  );
+
+  /// injection container
   await init();
 
   runApp(const MyApp());
