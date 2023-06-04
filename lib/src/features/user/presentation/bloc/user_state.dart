@@ -1,74 +1,65 @@
 part of 'user_bloc.dart';
 
-abstract class UserState extends Equatable {
-  const UserState();
-}
+class UserState extends Equatable {
+  const UserState({
+    this.status = Status.initial,
+    this.message = '',
+    this.userList = const <UserModel>[],
+    this.selectedUser,
+    this.addedStatus = Status.initial,
+    this.updatedStatus = Status.initial,
+    this.deletedStatus = Status.initial,
+  });
 
-class UserInitial extends UserState {
-  @override
-  List<Object> get props => [];
-}
-
-class UserLoading extends UserState {
-  @override
-  List<Object> get props => [];
-}
-
-class UserLoaded extends UserState {
+  final Status status;
+  final String message;
   final List<UserModel> userList;
+  final UserModel? selectedUser;
+  final Status addedStatus;
+  final Status updatedStatus;
+  final Status deletedStatus;
 
-  const UserLoaded({required this.userList});
-
-  @override
-  List<Object> get props => [userList];
-}
-
-class UserDetailsLoading extends UserState {
-  @override
-  List<Object> get props => [];
-}
-
-class UserDetailsLoaded extends UserState {
-  final UserModel user;
-
-  const UserDetailsLoaded({required this.user});
-
-  @override
-  List<Object> get props => [user];
-}
-
-class UserAddedSuccess extends UserState {
-  final String message;
-
-  const UserAddedSuccess({required this.message});
-
-  @override
-  List<Object> get props => [message];
-}
-
-class UserUpdateSuccess extends UserState {
-  final String message;
-
-  const UserUpdateSuccess({required this.message});
+  UserState copyWith({
+    Status? status,
+    String? message,
+    List<UserModel>? userList,
+    UserModel? selectedUser,
+    Status? addedStatus,
+    Status? updatedStatus,
+    Status? deletedStatus,
+  }) {
+    return UserState(
+      status: status ?? this.status,
+      message: message ?? this.message,
+      userList: userList ?? this.userList,
+      selectedUser: selectedUser ?? this.selectedUser,
+      addedStatus: addedStatus ?? this.addedStatus,
+      updatedStatus: updatedStatus ?? this.updatedStatus,
+      deletedStatus: deletedStatus ?? this.deletedStatus,
+    );
+  }
 
   @override
-  List<Object> get props => [message];
-}
-
-class UserDeleteSuccess extends UserState {
-  final String message;
-
-  const UserDeleteSuccess({required this.message});
-
-  @override
-  List<Object> get props => [message];
-}
-
-class UserError extends UserState {
-  final String message;
-
-  const UserError({required this.message});
+  String toString() {
+    return '''UserState { 
+      status: $status, 
+      message: $message,
+      userList: ${userList.length},
+      selectedUser: $selectedUser,
+      addedStatus: $addedStatus,
+      updatedStatus: $updatedStatus,
+      deletedStatus: $deletedStatus
+    }''';
+  }
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [
+        status,
+        message,
+        userList,
+        selectedUser.toString(),
+        addedStatus,
+        updatedStatus,
+        deletedStatus,
+      ];
 }

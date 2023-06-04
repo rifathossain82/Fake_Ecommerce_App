@@ -163,13 +163,13 @@ class _AddOrUpdateProductPageState extends State<AddOrUpdateProductPage> {
                 onPressed: addOrUpdateMethod,
                 child: BlocConsumer<ProductBloc, ProductState>(
                   listener: (context, state) {
-                    if (state is ProductError) {
+                    if (state.addedStatus == Status.failure) {
                       context.showSnackBar(
                         message: state.message,
                         bgColor: failedColor,
                       );
                     }
-                    if (state is ProductAddedSuccess) {
+                    if (state.addedStatus == Status.success) {
                       context.showSnackBar(
                         message: state.message,
                         bgColor: successColor,
@@ -180,7 +180,7 @@ class _AddOrUpdateProductPageState extends State<AddOrUpdateProductPage> {
                       clearForm();
                       context.pop(result: true);
                     }
-                    if (state is ProductUpdatedSuccess) {
+                    if (state.updatedStatus == Status.success) {
                       context.showSnackBar(
                         message: state.message,
                         bgColor: successColor,
@@ -193,7 +193,7 @@ class _AddOrUpdateProductPageState extends State<AddOrUpdateProductPage> {
                     }
                   },
                   builder: (context, state) {
-                    if (state is ProductLoading) {
+                    if (state.addedStatus == Status.loading || state.updatedStatus == Status.loading) {
                       return SizedBox(
                         height: 20,
                         width: 20,

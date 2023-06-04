@@ -4,12 +4,19 @@ enum LocalStorageKey {
   isDark,
 }
 
-enum PageType{
+enum PageType {
   add,
   update,
 }
 
-enum SortingType{
+enum SortingType {
   desc,
   asc,
+}
+
+enum Status {
+  initial,
+  loading,
+  success,
+  failure,
 }

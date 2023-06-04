@@ -30,7 +30,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     selectedSorting = null;
   }
 
-  ProductBloc({required this.productUseCase}) : super(ProductInitial()) {
+  ProductBloc({required this.productUseCase}) : super(const ProductState()) {
     on<ProductEvent>(_onProductEvent);
   }
 
@@ -39,7 +39,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       try {
         /// Check if the product list is already loaded
         if (!isProductListLoaded) {
-          emit(ProductLoading());
+          emit(state.copyWith(status: Status.loading));
 
           final Map<String, dynamic> params = {
             'limit': '$limit',
@@ -50,26 +50,46 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
           /// Set the flag to indicate the product list is loaded
           isProductListLoaded = true;
-          emit(ProductLoaded(productList));
+          emit(
+            state.copyWith(
+              productList: productList,
+              status: Status.success,
+            ),
+          );
         }
       } catch (e) {
-        emit(ProductError('$e'));
+        emit(
+          state.copyWith(
+            status: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     } else if (event is GetProductDetails) {
       try {
-        emit(ProductDetailsLoading());
+        emit(state.copyWith(status: Status.loading));
 
         final ProductModel product = await productUseCase.getProductDetails(
           event.productId,
         );
 
-        emit(ProductDetailsLoaded(product));
+        emit(
+          state.copyWith(
+            selectedProduct: product,
+            status: Status.success,
+          ),
+        );
       } catch (e) {
-        emit(ProductError('$e'));
+        emit(
+          state.copyWith(
+            status: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     } else if (event is GetCategoryWiseProduct) {
       try {
-        emit(ProductLoading());
+        emit(state.copyWith(status: Status.loading));
 
         final Map<String, dynamic> params = {
           'limit': '$limit',
@@ -81,33 +101,73 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           params: params,
         );
 
-        emit(ProductLoaded(productList));
+        emit(
+          state.copyWith(
+            productList: productList,
+            status: Status.success,
+          ),
+        );
       } catch (e) {
-        emit(ProductError('$e'));
+        emit(
+          state.copyWith(
+            status: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     } else if (event is AddProduct) {
       try {
-        emit(ProductLoading());
+        emit(state.copyWith(addedStatus: Status.loading));
         var message = await productUseCase.addProduct(event.requestBody);
-        emit(ProductAddedSuccess(message));
+        emit(
+          state.copyWith(
+            addedStatus: Status.success,
+            message: message,
+          ),
+        );
       } catch (e) {
-        emit(ProductError('$e'));
+        emit(
+          state.copyWith(
+            addedStatus: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     } else if (event is UpdateProduct) {
       try {
-        emit(ProductLoading());
+        emit(state.copyWith(updatedStatus: Status.loading));
         var message = await productUseCase.updateProduct(event.requestBody);
-        emit(ProductUpdatedSuccess(message));
+        emit(
+          state.copyWith(
+            updatedStatus: Status.success,
+            message: message,
+          ),
+        );
       } catch (e) {
-        emit(ProductError('$e'));
+        emit(
+          state.copyWith(
+            updatedStatus: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     } else if (event is DeleteProduct) {
       try {
-        emit(ProductLoading());
+        emit(state.copyWith(deletedStatus: Status.loading));
         var message = await productUseCase.deleteProduct(event.productId);
-        emit(ProductDeletedSuccess(message));
+        emit(
+          state.copyWith(
+            deletedStatus: Status.success,
+            message: message,
+          ),
+        );
       } catch (e) {
-        emit(ProductError('$e'));
+        emit(
+          state.copyWith(
+            deletedStatus: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     }
   }

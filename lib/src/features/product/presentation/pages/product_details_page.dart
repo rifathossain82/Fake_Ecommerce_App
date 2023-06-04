@@ -1,4 +1,5 @@
 import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
+import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
 import 'package:fake_ecommerce_app/src/core/widgets/k_custom_loader.dart';
@@ -34,7 +35,7 @@ class ProductDetailsPage extends StatelessWidget {
             ListView(),
             BlocConsumer<ProductBloc, ProductState>(
               listener: (context, state) {
-                if (state is ProductError) {
+                if (state.status == Status.failure) {
                   context.showSnackBar(
                     message: state.message,
                     bgColor: failedColor,
@@ -42,12 +43,12 @@ class ProductDetailsPage extends StatelessWidget {
                 }
               },
               builder: (context, state) {
-                if (state is ProductDetailsLoading) {
+                if (state.status == Status.loading) {
                   return const KCustomLoader();
-                } else if (state is ProductDetailsLoaded) {
+                } else if (state.status == Status.success) {
                   return BlocProvider(
                     create: (context) => sl<ProductBloc>(),
-                    child: ProductDetailsWidget(product: state.product),
+                    child: ProductDetailsWidget(product: state.selectedProduct!),
                   );
                 } else {
                   return const NoDataFound();

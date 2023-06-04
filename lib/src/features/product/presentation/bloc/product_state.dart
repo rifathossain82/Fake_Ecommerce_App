@@ -1,74 +1,65 @@
 part of 'product_bloc.dart';
 
-abstract class ProductState extends Equatable {
-  const ProductState();
-}
+class ProductState extends Equatable {
+  const ProductState({
+    this.status = Status.initial,
+    this.message = '',
+    this.productList = const <ProductModel>[],
+    this.selectedProduct,
+    this.addedStatus = Status.initial,
+    this.updatedStatus = Status.initial,
+    this.deletedStatus = Status.initial,
+  });
 
-class ProductInitial extends ProductState {
-  @override
-  List<Object> get props => [];
-}
-
-class ProductLoading extends ProductState {
-  @override
-  List<Object> get props => [];
-}
-
-class ProductLoaded extends ProductState {
+  final Status status;
+  final String message;
   final List<ProductModel> productList;
+  final ProductModel? selectedProduct;
+  final Status addedStatus;
+  final Status updatedStatus;
+  final Status deletedStatus;
 
-  const ProductLoaded(this.productList);
-
-  @override
-  List<Object> get props => [productList];
-}
-
-class ProductDetailsLoading extends ProductState {
-  @override
-  List<Object> get props => [];
-}
-
-class ProductDetailsLoaded extends ProductState {
-  final ProductModel product;
-
-  const ProductDetailsLoaded(this.product);
-
-  @override
-  List<Object> get props => [product];
-}
-
-class ProductError extends ProductState {
-  final String message;
-
-  const ProductError(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
-
-class ProductAddedSuccess extends ProductState {
-  final String message;
-
-  const ProductAddedSuccess(this.message);
+  ProductState copyWith({
+    Status? status,
+    String? message,
+    List<ProductModel>? productList,
+    ProductModel? selectedProduct,
+    Status? addedStatus,
+    Status? updatedStatus,
+    Status? deletedStatus,
+  }) {
+    return ProductState(
+      status: status ?? this.status,
+      message: message ?? this.message,
+      productList: productList ?? this.productList,
+      selectedProduct: selectedProduct ?? this.selectedProduct,
+      addedStatus: addedStatus ?? this.addedStatus,
+      updatedStatus: updatedStatus ?? this.updatedStatus,
+      deletedStatus: deletedStatus ?? this.deletedStatus,
+    );
+  }
 
   @override
-  List<Object> get props => [message];
-}
-
-class ProductUpdatedSuccess extends ProductState {
-  final String message;
-
-  const ProductUpdatedSuccess(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
-
-class ProductDeletedSuccess extends ProductState {
-  final String message;
-
-  const ProductDeletedSuccess(this.message);
+  String toString() {
+    return '''ProductState { 
+      status: $status, 
+      message: $message,
+      productList: ${productList.length},
+      selectedProduct: $selectedProduct,
+      addedStatus: $addedStatus,
+      updatedStatus: $updatedStatus,
+      deletedStatus: $deletedStatus
+    }''';
+  }
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [
+    status,
+    message,
+    productList,
+    selectedProduct.toString(),
+    addedStatus,
+    updatedStatus,
+    deletedStatus,
+  ];
 }

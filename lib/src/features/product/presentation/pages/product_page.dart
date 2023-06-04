@@ -57,8 +57,7 @@ class _ProductPageState extends State<ProductPage> {
                         reloadProducts();
                       });
                     },
-                    selectedSortingType:
-                        context.read<ProductBloc>().selectedSorting,
+                    selectedSortingType: context.read<ProductBloc>().selectedSorting,
                     onChangedSorting: (value) {
                       context.read<ProductBloc>().updateSorting(value);
                       reloadProducts();
@@ -73,7 +72,7 @@ class _ProductPageState extends State<ProductPage> {
                     ListView(),
                     BlocConsumer<ProductBloc, ProductState>(
                       listener: (context, state) {
-                        if (state is ProductError) {
+                        if (state.status == Status.failure) {
                           context.showSnackBar(
                             message: state.message,
                             bgColor: failedColor,
@@ -81,12 +80,12 @@ class _ProductPageState extends State<ProductPage> {
                         }
                       },
                       builder: (context, state) {
-                        if (state is ProductInitial ||
-                            state is ProductLoading) {
+                        if (state.status == Status.loading) {
                           return const ShimmerGridViewBuilder();
-                        } else if (state is ProductLoaded) {
+                        } else if (state.status == Status.success) {
                           return ProductGridviewWidget(
-                              products: state.productList);
+                            products: state.productList,
+                          );
                         } else {
                           return const NoDataFound();
                         }
@@ -118,11 +117,9 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   void onRefreshMethod() {
-
     /// clear filtering value from bloc and reload product list
     context.read<ProductBloc>().clearFiltering();
     reloadProducts();
-
 
     /// clear the limit text field
     limitTextController.clear();

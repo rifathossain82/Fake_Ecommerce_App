@@ -115,13 +115,13 @@ class ProductDetailsWidget extends StatelessWidget {
               width: context.screenWidth * 0.44,
               child: BlocConsumer<ProductBloc, ProductState>(
                 listener: (context, state) {
-                  if (state is ProductError) {
+                  if (state.deletedStatus == Status.failure) {
                     context.showSnackBar(
                       message: state.message,
                       bgColor: failedColor,
                     );
                   }
-                  if (state is ProductDeletedSuccess) {
+                  if (state.deletedStatus == Status.success) {
                     context.showSnackBar(
                       message: state.message,
                       bgColor: successColor,
@@ -133,7 +133,7 @@ class ProductDetailsWidget extends StatelessWidget {
                   }
                 },
                 builder: (context, state) {
-                  if (state is ProductLoading) {
+                  if (state.deletedStatus == Status.loading) {
                     return const SizedBox(
                       height: 20,
                       width: 20,

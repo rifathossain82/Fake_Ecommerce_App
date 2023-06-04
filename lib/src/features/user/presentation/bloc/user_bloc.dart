@@ -16,25 +16,25 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   String? limit;
   SortingType? selectedSorting;
 
-  void updateLimit(String value){
+  void updateLimit(String value) {
     limit = value;
   }
 
-  void updateSorting(SortingType type){
+  void updateSorting(SortingType type) {
     selectedSorting = type;
   }
 
-  void clearFiltering(){
+  void clearFiltering() {
     limit = null;
     selectedSorting = null;
   }
 
-  void reloadUserList(){
+  void reloadUserList() {
     isUserListLoaded = false;
     add(GetUserList());
   }
 
-  UserBloc({required this.useCase}) : super(UserInitial()) {
+  UserBloc({required this.useCase}) : super(const UserState()) {
     on<UserEvent>(_onUserEvent);
   }
 
@@ -42,51 +42,99 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is GetUserList) {
       try {
         if (!isUserListLoaded) {
-          emit(UserLoading());
+          emit(state.copyWith(status: Status.loading));
 
           final Map<String, dynamic> params = {
-            'limit' : '$limit',
-            'sort' : '${selectedSorting?.name}',
+            'limit': '$limit',
+            'sort': '${selectedSorting?.name}',
           };
 
           final List<UserModel> userList = await useCase.getUserList(params);
           isUserListLoaded = true;
-          emit(UserLoaded(userList: userList));
+          emit(
+            state.copyWith(
+              status: Status.success,
+              userList: userList,
+            ),
+          );
         }
       } catch (e) {
-        emit(UserError(message: '$e'));
+        emit(
+          state.copyWith(
+            status: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     } else if (event is GetUserDetails) {
       try {
-        emit(UserDetailsLoading());
+        emit(state.copyWith(status: Status.loading));
         final UserModel user = await useCase.getUserDetails(event.userId);
-        emit(UserDetailsLoaded(user: user));
+        emit(state.copyWith(
+          selectedUser: user,
+          status: Status.success,
+        ));
       } catch (e) {
-        emit(UserError(message: '$e'));
+        emit(
+          state.copyWith(
+            status: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     } else if (event is AddNewUser) {
       try {
-        emit(UserLoading());
+        emit(state.copyWith(addedStatus: Status.loading));
         final String message = await useCase.addUser(event.requestBody);
-        emit(UserAddedSuccess(message: message));
+        emit(
+          state.copyWith(
+            addedStatus: Status.success,
+            message: message,
+          ),
+        );
       } catch (e) {
-        emit(UserError(message: '$e'));
+        emit(
+          state.copyWith(
+            addedStatus: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     } else if (event is UpdateUser) {
       try {
-        emit(UserLoading());
+        emit(state.copyWith(updatedStatus: Status.loading));
         final String message = await useCase.updateUser(event.requestBody);
-        emit(UserUpdateSuccess(message: message));
+        emit(
+          state.copyWith(
+            updatedStatus: Status.success,
+            message: message,
+          ),
+        );
       } catch (e) {
-        emit(UserError(message: '$e'));
+        emit(
+          state.copyWith(
+            updatedStatus: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     } else if (event is DeleteUser) {
       try {
-        emit(UserLoading());
+        emit(state.copyWith(deletedStatus: Status.loading));
         final String message = await useCase.deleteUser(event.requestBody);
-        emit(UserDeleteSuccess(message: message));
+        emit(
+          state.copyWith(
+            deletedStatus: Status.success,
+            message: message,
+          ),
+        );
       } catch (e) {
-        emit(UserError(message: '$e'));
+        emit(
+          state.copyWith(
+            deletedStatus: Status.failure,
+            message: '$e',
+          ),
+        );
       }
     }
   }

@@ -255,13 +255,13 @@ class _AddOrUpdateUserPageState extends State<AddOrUpdateUserPage> {
                 onPressed: addOrUpdateMethod,
                 child: BlocConsumer<UserBloc, UserState>(
                   listener: (context, state) {
-                    if (state is UserError) {
+                    if (state.addedStatus == Status.failure) {
                       context.showSnackBar(
                         message: state.message,
                         bgColor: failedColor,
                       );
                     }
-                    if (state is UserAddedSuccess) {
+                    if (state.addedStatus == Status.success) {
                       context.showSnackBar(
                         message: state.message,
                         bgColor: successColor,
@@ -272,7 +272,14 @@ class _AddOrUpdateUserPageState extends State<AddOrUpdateUserPage> {
                       clearForm();
                       context.pop(result: true);
                     }
-                    if (state is UserUpdateSuccess) {
+
+                    if (state.updatedStatus == Status.failure) {
+                      context.showSnackBar(
+                        message: state.message,
+                        bgColor: failedColor,
+                      );
+                    }
+                    if (state.updatedStatus == Status.success) {
                       context.showSnackBar(
                         message: state.message,
                         bgColor: successColor,
@@ -285,7 +292,7 @@ class _AddOrUpdateUserPageState extends State<AddOrUpdateUserPage> {
                     }
                   },
                   builder: (context, state) {
-                    if (state is UserLoading) {
+                    if (state.addedStatus == Status.loading || state.updatedStatus == Status.loading) {
                       return SizedBox(
                         height: 20,
                         width: 20,

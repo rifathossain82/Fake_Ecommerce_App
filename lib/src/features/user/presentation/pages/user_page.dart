@@ -1,5 +1,7 @@
 import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
+import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
+import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/helpers/helper_methods.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
@@ -68,7 +70,7 @@ class _UserPageState extends State<UserPage> {
                     ListView(),
                     BlocConsumer<UserBloc, UserState>(
                       listener: (context, state) {
-                        if (state is UserError) {
+                        if (state.status == Status.failure) {
                           context.showSnackBar(
                             message: state.message,
                             bgColor: failedColor,
@@ -76,9 +78,9 @@ class _UserPageState extends State<UserPage> {
                         }
                       },
                       builder: (context, state) {
-                        if (state is UserInitial || state is UserLoading) {
+                        if (state.status == Status.loading) {
                           return const ShimmerListViewBuilder();
-                        } else if (state is UserLoaded) {
+                        } else if (state.status == Status.success) {
                           return UserListViewWidget(userList: state.userList);
                         } else {
                           return const NoDataFound();
