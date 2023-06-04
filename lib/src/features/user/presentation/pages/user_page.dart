@@ -1,7 +1,5 @@
 import 'package:fake_ecommerce_app/src/core/di/injection_container.dart';
 import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
-import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
-import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/extensions/build_context_extension.dart';
 import 'package:fake_ecommerce_app/src/core/helpers/helper_methods.dart';
 import 'package:fake_ecommerce_app/src/core/utils/color.dart';
@@ -78,7 +76,7 @@ class _UserPageState extends State<UserPage> {
                         }
                       },
                       builder: (context, state) {
-                        if (state.status == Status.loading) {
+                        if (state.status == Status.initial || state.status == Status.loading) {
                           return const ShimmerListViewBuilder();
                         } else if (state.status == Status.success) {
                           return UserListViewWidget(userList: state.userList);

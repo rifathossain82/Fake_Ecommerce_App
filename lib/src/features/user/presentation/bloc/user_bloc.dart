@@ -70,10 +70,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       try {
         emit(state.copyWith(status: Status.loading));
         final UserModel user = await useCase.getUserDetails(event.userId);
-        emit(state.copyWith(
-          selectedUser: user,
-          status: Status.success,
-        ));
+        emit(
+          state.copyWith(
+            selectedUser: user,
+            status: Status.success,
+          ),
+        );
       } catch (e) {
         emit(
           state.copyWith(
