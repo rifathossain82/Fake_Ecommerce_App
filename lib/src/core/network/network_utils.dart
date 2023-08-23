@@ -5,6 +5,7 @@ import 'package:fake_ecommerce_app/src/core/enums/app_enum.dart';
 import 'package:fake_ecommerce_app/src/core/errors/messages.dart';
 import 'package:fake_ecommerce_app/src/core/helpers/helper_methods.dart';
 import 'package:fake_ecommerce_app/src/core/services/local_storage.dart';
+import 'package:fake_ecommerce_app/src/core/utils/logger.dart';
 import 'package:http/http.dart' as http;
 
 final _localStorage = sl<LocalStorage>();
@@ -15,8 +16,8 @@ class Network {
       throw Message.noInternet;
     }
 
-    kPrint("\nYou hit: $api");
-    kPrint("Request Params: $params");
+    Log.info("\nYou hit: $api");
+    Log.info("Request Params: $params");
 
     var headers = {
       'Accept': 'application/json',
@@ -42,8 +43,8 @@ class Network {
       throw Message.noInternet;
     }
 
-    kPrint('\nYou hit: $api');
-    kPrint('Request Body: ${jsonEncode(body)}');
+    Log.info('\nYou hit: $api');
+    Log.info('Request Body: ${jsonEncode(body)}');
 
     var headers = {
       'Accept': 'application/json',
@@ -64,8 +65,8 @@ class Network {
       throw Message.noInternet;
     }
 
-    kPrint('\nYou hit: $api');
-    kPrint('Request Body: ${jsonEncode(body)}');
+    Log.info('\nYou hit: $api');
+    Log.info('Request Body: ${jsonEncode(body)}');
 
     var headers = {
       'Accept': 'application/json',
@@ -87,8 +88,8 @@ class Network {
       throw Message.noInternet;
     }
 
-    kPrint('\nYou hit: $api');
-    kPrint('Request Body: ${jsonEncode(body)}');
+    Log.info('\nYou hit: $api');
+    Log.info('Request Body: ${jsonEncode(body)}');
 
     var headers = {
       'Accept': 'application/json',
@@ -114,8 +115,8 @@ class Network {
       throw Message.noInternet;
     }
 
-    kPrint("\nYou hit: $api");
-    kPrint("Request body: $body");
+    Log.info("\nYou hit: $api");
+    Log.info("Request body: $body");
 
     var headers = {
       'Accept': 'application/json',
@@ -148,8 +149,8 @@ class Network {
       }
 
       if (response.statusCode >= 200 && response.statusCode <= 210) {
-        kPrint('SuccessCode: ${response.statusCode}');
-        kPrint('SuccessResponse: ${response.body}');
+        Log.info('SuccessCode: ${response.statusCode}');
+        Log.info('SuccessResponse: ${response.body}');
 
         if (response.body.isNotEmpty) {
           return json.decode(response.body);
@@ -170,8 +171,8 @@ class Network {
       } else if (response.statusCode == 500) {
         throw Message.error500;
       } else {
-        kPrint('ErrorCode: ${response.statusCode}');
-        kPrint('ErrorResponse: ${response.body}');
+        Log.error('ErrorCode: ${response.statusCode}');
+        Log.error('ErrorResponse: ${response.body}');
 
         String msg = Message.unknown;
         if (response.body.isNotEmpty) {

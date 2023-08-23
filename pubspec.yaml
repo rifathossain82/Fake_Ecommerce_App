@@ -49,6 +49,7 @@ dependencies:
   flutter_bloc: ^8.1.2
   get_it: ^7.2.0
   shimmer: ^2.0.0
+  logger: ^2.0.1
 
 dev_dependencies:
   flutter_test:
