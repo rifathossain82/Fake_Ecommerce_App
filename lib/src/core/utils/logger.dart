@@ -1,7 +1,7 @@
 import 'package:logger/logger.dart';
 
 class Log {
-  Log._loggerType({loggerType = 'simple'}) {
+  Log._loggerType({loggerType = 'pretty'}) {
     switch (loggerType) {
       case 'simple':
         _logger =
